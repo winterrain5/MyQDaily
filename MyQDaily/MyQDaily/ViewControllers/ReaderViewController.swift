@@ -28,6 +28,7 @@ class ReaderViewController: UIViewController {
         
     }()
     
+    // 帧动画视图
     var loadImageView:UIImageView = {
     
         let imageV = UIImageView()

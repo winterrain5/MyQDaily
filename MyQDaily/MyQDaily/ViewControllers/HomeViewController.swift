@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     // MARK: -属性
     private var homeNewsTableView:UITableView?
     /**model 数组*/
-    private var contentArray:NSMutableArray = {
+    private lazy var contentArray:NSMutableArray = {
         let array = NSMutableArray()
         return array
     }()
@@ -30,19 +30,20 @@ class HomeViewController: UIViewController {
     private var contentOffsetY:CGFloat?
     
     
-    var responseModel:ResponsModel?
-    var feedsArray:[AnyObject] = {
+    private var responseModel:ResponsModel?
+    private lazy var feedsArray:[AnyObject] = {
     
         let array = [AnyObject]()
         return array
+        
     }()
-    var bannersArray:[AnyObject] = {
+    private lazy var bannersArray:[AnyObject] = {
         
         let array = [AnyObject]()
         return array
     }()
 
-    var imageArray:[AnyObject] = {
+    private lazy var imageArray:[AnyObject] = {
         
         let array = [AnyObject]()
         return array
@@ -73,13 +74,13 @@ class HomeViewController: UIViewController {
         refreshData()
         
         // 设置下拉刷新
-        refreshHeader = MJRefreshNormalHeader.init(refreshingBlock: { () -> Void in
-            self.refreshData()
-
-        })
-        refreshHeader?.lastUpdatedTimeLabel?.hidden = true
-        refreshHeader?.stateLabel?.hidden = true
-        homeNewsTableView?.mj_header = refreshHeader
+//        refreshHeader = MJRefreshNormalHeader.init(refreshingBlock: { () -> Void in
+//            self.refreshData()
+//
+//        })
+//        refreshHeader?.lastUpdatedTimeLabel?.hidden = true
+//        refreshHeader?.stateLabel?.hidden = true
+//        homeNewsTableView?.mj_header = refreshHeader
         
         
         // 设置上拉加载
@@ -114,7 +115,7 @@ class HomeViewController: UIViewController {
         suspensionView?.frame = CGRectMake(10, SCREENH_HEIGHT - 70, 54, 54)
         view.addSubview(suspensionView!)
         suspensionView?.delegate  = self
-        suspensionView?.suspensionButtonStyle = 1
+        suspensionView?.style = .QDaily
         
         menuView = MenuView()
         menuView?.frame = view.bounds

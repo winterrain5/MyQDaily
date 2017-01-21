@@ -36,14 +36,13 @@ class SuspensionView: UIView {
         
         suspensionButton?.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
         var  imageName = ""
-        suspensionButton?.tag = suspensionButtonStyle!
-        if suspensionButtonStyle == 1 { // Qlogo样式
+        if style == .QDaily { // Qlogo样式
             imageName = "c_Qdaily button_54x54_"
-        } else if suspensionButtonStyle == 2{ // 关闭样式
+        } else if style == .Close{ // 关闭样式
             imageName = "c_close button_54x54_"
-        } else if suspensionButtonStyle == 3{ // 返回样式1
+        } else if style == .NavBack{ // 返回样式1
             imageName = "navigation_back_round_normal"
-        } else if suspensionButtonStyle == 4{ // 返回样式2
+        } else if style == .HomeBack{ // 返回样式2
             imageName = "homeBackButton"
         }
 
@@ -67,7 +66,7 @@ class SuspensionView: UIView {
     @objc func clickSuspensionButton(sender:UIButton) {
         sender.selected = !sender.selected
         
-        if suspensionButton?.tag == 1 || suspensionButton?.tag == 2 {
+        if style == .QDaily || style == .Close {
             
             // 加判断,防止连击时出现界面逻辑交互混乱
             if 0 == sender.layer.frame.origin.y {
@@ -78,10 +77,10 @@ class SuspensionView: UIView {
                         self.popAnimationWithOffset(-80, beginTime: 0)
                         
                         // 弹出菜单界面
-                        if self.suspensionButton!.tag == 1 {
+                        if self.style == .QDaily {
                             self.suspensionButton!.setImage(UIImage(named: "c_close button_54x54_"), forState: UIControlState.Normal)
                             // 重新设置按钮的tag
-                            self.suspensionButton!.tag = 2
+                            self.style = .Close
                             
                             // 弹出菜单的代理
                             if (self.delegate?.respondsToSelector(Selector("popUpMenu")) != nil) {
@@ -93,10 +92,10 @@ class SuspensionView: UIView {
                         }
                         
                         // 关闭菜单界面
-                        if self.suspensionButton!.tag == 2 {
+                        if self.style == .Close {
                             self.suspensionButton!.setImage(UIImage(named: "c_Qdaily button_54x54_"), forState: UIControlState.Normal)
                             // 重新设置按钮的tag
-                            self.suspensionButton!.tag = 1
+                            self.style = .QDaily
                             // 关闭菜单代理
                             if (self.delegate?.respondsToSelector(Selector("closeMenu")) != nil) {
                                 self.delegate?.closeMenu()
@@ -109,8 +108,8 @@ class SuspensionView: UIView {
         }
         
         // 返回首页
-        if suspensionButton!.tag == 3 {
-            suspensionButton!.tag = 1
+        if style == .NavBack {
+            style = .QDaily
             if (self.delegate?.respondsToSelector(Selector("backHome")) != nil) {
                 self.delegate?.backHome()
             }
@@ -118,7 +117,7 @@ class SuspensionView: UIView {
         }
         
         // 返回到MenuView
-        if suspensionButton!.tag == 4{
+        if style == .HomeBack{
             if (self.delegate?.respondsToSelector(Selector("backToMenuView")) != nil) {
                 self.delegate?.backToMenuView()
             }
@@ -144,7 +143,6 @@ class SuspensionView: UIView {
     }
     
     // MARK: -外部方法和属性
-    var suspensionButtonStyle : NSInteger?
     weak var delegate:SuspensionViewDelegate?
     
     enum buttonStyle : Int {

@@ -115,4 +115,5 @@ class ReaderFooterView: UIView {
     }
     
     weak var delegate:ReaderFooterViewDelegate?
+    
 }
