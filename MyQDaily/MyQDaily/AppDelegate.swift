@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame:UIScreen.mainScreen().bounds)
         
-        let nav = UINavigationController(rootViewController: HomeViewController())
+        let nav = UINavigationController(rootViewController: PageViewController())
         
         window?.rootViewController = nav
         

@@ -13,10 +13,10 @@ import MJRefresh
 let  SCREEN_WIDTH  = UIScreen.mainScreen().bounds.size.width//屏幕宽度
 let  SCREENH_HEIGHT = UIScreen.mainScreen().bounds.size.height//屏幕高度
 
-class HomeViewController: UIViewController {
+class HomeViewController: UITableViewController {
 
     // MARK: -属性
-    private var homeNewsTableView:UITableView?
+//    private var homeNewsTableView:UITableView?
     /**model 数组*/
     private lazy var contentArray:NSMutableArray = {
         let array = NSMutableArray()
@@ -74,13 +74,9 @@ class HomeViewController: UIViewController {
         refreshData()
         
         // 设置下拉刷新
-//        refreshHeader = MJRefreshNormalHeader.init(refreshingBlock: { () -> Void in
-//            self.refreshData()
-//
-//        })
-//        refreshHeader?.lastUpdatedTimeLabel?.hidden = true
-//        refreshHeader?.stateLabel?.hidden = true
-//        homeNewsTableView?.mj_header = refreshHeader
+        let refreshV = RefreshControlView()
+        refreshControl = refreshV
+        refreshControl?.addTarget(self, action: Selector("refreshData"), forControlEvents: UIControlEvents.ValueChanged)
         
         
         // 设置上拉加载
@@ -89,31 +85,32 @@ class HomeViewController: UIViewController {
         })
         refreshFooter?.setTitle("加载更多...", forState: MJRefreshState.Refreshing)
         refreshFooter?.setTitle("没有更多内容了", forState: MJRefreshState.NoMoreData)
-        homeNewsTableView?.mj_footer = refreshFooter
+        tableView.mj_footer = refreshFooter
+        
+        
+     
     }
     
     override func viewWillAppear(animated: Bool) {
          super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        automaticallyAdjustsScrollViewInsets = false
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//        automaticallyAdjustsScrollViewInsets = false
+        
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+    override func viewWillDisappear(animated: Bool) {
+        suspensionView?.removeFromSuperview()
     }
+    
+  
     
      private func setupUI() {
         
         
-        homeNewsTableView = UITableView(frame: UIScreen.mainScreen().bounds, style: UITableViewStyle.Plain)
-        homeNewsTableView?.delegate = self
-        homeNewsTableView?.dataSource = self
-        homeNewsTableView?.separatorStyle = UITableViewCellSeparatorStyle.None
-        view.addSubview(homeNewsTableView!)
-        
         suspensionView = SuspensionView()
+        let window = UIApplication.sharedApplication().keyWindow
+        window!.addSubview(suspensionView!)
         suspensionView?.frame = CGRectMake(10, SCREENH_HEIGHT - 70, 54, 54)
-        view.addSubview(suspensionView!)
         suspensionView?.delegate  = self
         suspensionView?.style = .QDaily
         
@@ -143,7 +140,7 @@ class HomeViewController: UIViewController {
                 print(self.contentArray)
                 self.refreshFooter?.endRefreshing()
                 
-                self.homeNewsTableView?.reloadData()
+                self.tableView.reloadData()
                 
                 
             })
@@ -154,7 +151,7 @@ class HomeViewController: UIViewController {
     }
     
     // 下拉刷新
-    private func refreshData() {
+   @objc private func refreshData() {
         
         // 清空数据
         contentArray.removeAllObjects()
@@ -164,27 +161,33 @@ class HomeViewController: UIViewController {
             MBProgressHUD.hideHUDForView(self.view, animated: true)
             if (error != nil) {
                 MBProgressHUD.promptHudWithShowHUDAddedTo(self.view, message: "加载失败")
+                return
             } else {
                 
-                // 处理数据
-                self.responseModel = ResponsModel.mj_objectWithKeyValues(responseObject)
-                self.last_key = self.responseModel?.last_key
-                self.has_more = self.responseModel?.has_more
-                
-                // 获取feed数组
-                self.feedsArray = FeedsModel.mj_objectArrayWithKeyValuesArray(responseObject!["feeds"]) as [AnyObject]
-                self.contentArray.addObjectsFromArray(self.feedsArray)
-                
-                // 获取banner数组
-                self.bannersArray = BannerModel.mj_objectArrayWithKeyValuesArray(responseObject!["banners"]) as [AnyObject]
-                
-                self.refreshHeader?.endRefreshing()
-                self.refreshFooter?.endRefreshing()
-                
-                // 添加轮播图
-                self.addLoopView()
-                
-                self.homeNewsTableView?.reloadData()
+                if let tempDict = responseObject {
+                    // 处理数据
+                    self.responseModel = ResponsModel.mj_objectWithKeyValues(tempDict)
+                    self.last_key = self.responseModel?.last_key
+                    self.has_more = self.responseModel?.has_more
+                    
+                    // 获取feed数组
+                    self.feedsArray = FeedsModel.mj_objectArrayWithKeyValuesArray(tempDict["feeds"]) as [AnyObject]
+                    self.contentArray.addObjectsFromArray(self.feedsArray)
+                    
+                    // 获取banner数组
+                    self.bannersArray = BannerModel.mj_objectArrayWithKeyValuesArray(tempDict["banners"]) as [AnyObject]
+                    
+                    self.refreshControl?.endRefreshing()
+                    self.refreshFooter?.endRefreshing()
+                    
+                    // 添加轮播图
+                    self.addLoopView()
+                    
+                    self.tableView.reloadData()
+                } else {
+                    MBProgressHUD.promptHudWithShowHUDAddedTo(self.view, message: "加载失败")
+                    return
+                }
             }
             
         }
@@ -210,18 +213,15 @@ class HomeViewController: UIViewController {
         
         loopView?.frame = CGRectMake(0, 0, SCREEN_WIDTH, 300)
         
-        homeNewsTableView?.tableHeaderView = loopView
+        tableView.tableHeaderView = loopView
     }
     
-}
-
-
-extension HomeViewController: UITableViewDelegate,UITableViewDataSource,LoopViewDelegate,SuspensionViewDelegate
-{
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (contentArray.count)
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let feedModel = contentArray[indexPath.row]
         
@@ -236,7 +236,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource,LoopView
         cell!.selectionStyle = UITableViewCellSelectionStyle.None
         return cell!
     }
-    
+override     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if cell?.cellType == "0" {
             return 360
@@ -247,7 +247,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource,LoopView
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let feedModel = contentArray[indexPath.row] as! FeedsModel
         let appView = feedModel.post?.appview
         let readVc = ReaderViewController()
@@ -258,15 +258,22 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource,LoopView
     
     // MARK: -loopViewDelegate
     func didSelectdidSelectCollectionItem(loopview: LoopView, appView: String) {
-       let readVc = ReaderViewController()
+        let readVc = ReaderViewController()
         readVc.newsUrl = appView
         readVc.readerViewType = 1
         self.navigationController?.pushViewController(readVc, animated: true)
     }
+
+}
+
+
+extension HomeViewController:LoopViewDelegate,SuspensionViewDelegate
+{
     
     // MARK: SuspensionViewDelegate
     func popUpMenu() {
-        view.insertSubview(menuView!, belowSubview:suspensionView!)
+        let window = UIApplication.sharedApplication().keyWindow
+        window!.insertSubview(menuView!, belowSubview:suspensionView!)
         menuView?.popupMunuViewAnimation()
     }
     func closeMenu() {

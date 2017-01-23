@@ -9,7 +9,12 @@
 /* Begin PBXBuildFile section */
 		2511CB641E31D8510028CFED /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2511CB631E31D8510028CFED /* MenuView.swift */; };
 		2511CB661E31E9D50028CFED /* NewsClassificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2511CB651E31E9D50028CFED /* NewsClassificationView.swift */; };
-		2511CB6B1E32FA1F0028CFED /* RefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2511CB6A1E32FA1F0028CFED /* RefreshView.swift */; };
+		2511CB6B1E32FA1F0028CFED /* RefreshControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2511CB6A1E32FA1F0028CFED /* RefreshControlView.swift */; };
+		251238501E333BB400AABFAA /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512384F1E333BB400AABFAA /* PageViewController.swift */; };
+		251238521E333C5C00AABFAA /* CustomPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251238511E333C5C00AABFAA /* CustomPageView.swift */; };
+		251238571E33705C00AABFAA /* HomeLABSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251238561E33705C00AABFAA /* HomeLABSViewController.swift */; };
+		251238591E358C4900AABFAA /* SunRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251238581E358C4900AABFAA /* SunRefreshControl.swift */; };
+		2512385B1E358D2E00AABFAA /* SunRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2512385A1E358D2E00AABFAA /* SunRefreshControl.xib */; };
 		251B5C871E319FF000EE50E6 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 251B5C861E319FF000EE50E6 /* libz.1.tbd */; };
 		251B5C891E31AB2400EE50E6 /* NSObject+SystemShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251B5C881E31AB2400EE50E6 /* NSObject+SystemShare.swift */; };
 		25CBD88F1E2E256700BA36B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CBD88E1E2E256700BA36B1 /* AppDelegate.swift */; };
@@ -41,7 +46,12 @@
 		06F285BEEDAFF75E176F3235 /* Pods-MyQDaily.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyQDaily.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyQDaily/Pods-MyQDaily.release.xcconfig"; sourceTree = "<group>"; };
 		2511CB631E31D8510028CFED /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		2511CB651E31E9D50028CFED /* NewsClassificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsClassificationView.swift; sourceTree = "<group>"; };
-		2511CB6A1E32FA1F0028CFED /* RefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshView.swift; sourceTree = "<group>"; };
+		2511CB6A1E32FA1F0028CFED /* RefreshControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControlView.swift; sourceTree = "<group>"; };
+		2512384F1E333BB400AABFAA /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		251238511E333C5C00AABFAA /* CustomPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPageView.swift; sourceTree = "<group>"; };
+		251238561E33705C00AABFAA /* HomeLABSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeLABSViewController.swift; sourceTree = "<group>"; };
+		251238581E358C4900AABFAA /* SunRefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunRefreshControl.swift; sourceTree = "<group>"; };
+		2512385A1E358D2E00AABFAA /* SunRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SunRefreshControl.xib; sourceTree = "<group>"; };
 		251B5C861E319FF000EE50E6 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 		251B5C881E31AB2400EE50E6 /* NSObject+SystemShare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+SystemShare.swift"; sourceTree = "<group>"; };
 		25CBD88B1E2E256700BA36B1 /* MyQDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyQDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,7 +110,9 @@
 		2511CB691E32F9FC0028CFED /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
-				2511CB6A1E32FA1F0028CFED /* RefreshView.swift */,
+				2511CB6A1E32FA1F0028CFED /* RefreshControlView.swift */,
+				251238581E358C4900AABFAA /* SunRefreshControl.swift */,
+				2512385A1E358D2E00AABFAA /* SunRefreshControl.xib */,
 			);
 			path = Refresh;
 			sourceTree = "<group>";
@@ -159,6 +171,8 @@
 			children = (
 				25CBD8A21E2E2C1400BA36B1 /* HomeViewController.swift */,
 				25E058231E30978D001C0C09 /* ReaderViewController.swift */,
+				2512384F1E333BB400AABFAA /* PageViewController.swift */,
+				251238561E33705C00AABFAA /* HomeLABSViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -189,6 +203,7 @@
 				25E058251E30AF5B001C0C09 /* ReaderFooterView.swift */,
 				2511CB631E31D8510028CFED /* MenuView.swift */,
 				2511CB651E31E9D50028CFED /* NewsClassificationView.swift */,
+				251238511E333C5C00AABFAA /* CustomPageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +309,7 @@
 			files = (
 				25CBD8991E2E256700BA36B1 /* LaunchScreen.storyboard in Resources */,
 				25CBD8961E2E256700BA36B1 /* Assets.xcassets in Resources */,
+				2512385B1E358D2E00AABFAA /* SunRefreshControl.xib in Resources */,
 				25CBD9E51E2F00E900BA36B1 /* Podfile in Resources */,
 				25CBD8941E2E256700BA36B1 /* Main.storyboard in Resources */,
 			);
@@ -354,22 +370,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2511CB6B1E32FA1F0028CFED /* RefreshView.swift in Sources */,
+				2511CB6B1E32FA1F0028CFED /* RefreshControlView.swift in Sources */,
 				251B5C891E31AB2400EE50E6 /* NSObject+SystemShare.swift in Sources */,
 				25E0581D1E2F6AAE001C0C09 /* CategoryModel.swift in Sources */,
 				25CBD8911E2E256700BA36B1 /* ViewController.swift in Sources */,
 				2511CB641E31D8510028CFED /* MenuView.swift in Sources */,
 				25E0581B1E2F690E001C0C09 /* PostModel.swift in Sources */,
 				25CBD9EC1E2F16F000BA36B1 /* UIView+Extension.swift in Sources */,
+				251238521E333C5C00AABFAA /* CustomPageView.swift in Sources */,
 				25E058191E2F6883001C0C09 /* FeedsModel.swift in Sources */,
 				25CBD9E71E2F052200BA36B1 /* NSString+Extension.swift in Sources */,
 				25CBD9EE1E2F2F3E00BA36B1 /* HomeNewsCell.swift in Sources */,
 				25E058241E30978D001C0C09 /* ReaderViewController.swift in Sources */,
 				25CBD88F1E2E256700BA36B1 /* AppDelegate.swift in Sources */,
 				25CBD9E11E2EFF5700BA36B1 /* MBProgressHUD+Extension.swift in Sources */,
+				251238501E333BB400AABFAA /* PageViewController.swift in Sources */,
 				25E0581F1E2F6AF9001C0C09 /* BannerModel.swift in Sources */,
 				25CBD9F11E2F595600BA36B1 /* HomeNewsDataManager.swift in Sources */,
+				251238571E33705C00AABFAA /* HomeLABSViewController.swift in Sources */,
 				25E058261E30AF5B001C0C09 /* ReaderFooterView.swift in Sources */,
+				251238591E358C4900AABFAA /* SunRefreshControl.swift in Sources */,
 				25CBD8A31E2E2C1400BA36B1 /* HomeViewController.swift in Sources */,
 				25E058171E2F66E9001C0C09 /* ResponsModel.swift in Sources */,
 				25E058221E3063FF001C0C09 /* LoopView.swift in Sources */,
@@ -495,7 +515,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MyQDaily/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -508,8 +528,6 @@
 					"\"MJExtension\"",
 					"-framework",
 					"\"MJRefresh\"",
-					"-framework",
-					"\"Masonry\"",
 					"-framework",
 					"\"SDWebImage\"",
 					"-framework",
@@ -533,7 +551,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MyQDaily/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -546,8 +564,6 @@
 					"\"MJExtension\"",
 					"-framework",
 					"\"MJRefresh\"",
-					"-framework",
-					"\"Masonry\"",
 					"-framework",
 					"\"SDWebImage\"",
 					"-framework",
