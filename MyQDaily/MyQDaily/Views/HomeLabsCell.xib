@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="296" id="KGk-i7-Jjw" customClass="HomeLabsCell" customModule="MyQDaily" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="416" height="296"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="416" height="295"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="author_bg_default" translatesAutoresizingMaskIntoConstraints="NO" id="Xs8-1X-F6k">
+                        <rect key="frame" x="0.0" y="0.0" width="416" height="180"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="180" id="NxL-gY-Byc"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="根据你丰富的经验，哪些意识局的宣传噱头反而成了你的避雷针了？？？" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rg4-G3-OIq">
+                        <rect key="frame" x="20" y="195" width="376" height="40"/>
+                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电视剧和电影里出现什么活着那设么当噱头，会让你不想看了" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJN-x6-QE9">
+                        <rect key="frame" x="20" y="243" width="376" height="46"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTE-e5-Bgb">
+                        <rect key="frame" x="0.0" y="291" width="416" height="4"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="4" id="ie5-BM-IIE"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Lab_Vote_New" translatesAutoresizingMaskIntoConstraints="NO" id="Izm-FF-BIf">
+                        <rect key="frame" x="349" y="10" width="57" height="47"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="QTE-e5-Bgb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5dh-qc-WiN"/>
+                    <constraint firstAttribute="trailing" secondItem="Xs8-1X-F6k" secondAttribute="trailing" id="G81-oY-lpz"/>
+                    <constraint firstItem="Xs8-1X-F6k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GFh-wa-jYO"/>
+                    <constraint firstItem="Rg4-G3-OIq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="IZv-7o-jxT"/>
+                    <constraint firstAttribute="trailing" secondItem="QTE-e5-Bgb" secondAttribute="trailing" id="JYk-Lo-OA1"/>
+                    <constraint firstItem="Xs8-1X-F6k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QcU-Zi-jwl"/>
+                    <constraint firstItem="Rg4-G3-OIq" firstAttribute="top" secondItem="Xs8-1X-F6k" secondAttribute="bottom" constant="15" id="Wdj-vU-15K"/>
+                    <constraint firstAttribute="trailing" secondItem="uJN-x6-QE9" secondAttribute="trailing" constant="20" id="fCN-IS-BOS"/>
+                    <constraint firstAttribute="trailing" secondItem="Rg4-G3-OIq" secondAttribute="trailing" constant="20" id="iFA-rf-7s6"/>
+                    <constraint firstItem="QTE-e5-Bgb" firstAttribute="top" secondItem="uJN-x6-QE9" secondAttribute="bottom" constant="2" id="j6B-C6-8w6"/>
+                    <constraint firstItem="Izm-FF-BIf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="vC2-ye-tmD"/>
+                    <constraint firstItem="uJN-x6-QE9" firstAttribute="top" secondItem="Rg4-G3-OIq" secondAttribute="bottom" constant="8" id="xgG-5l-boV"/>
+                    <constraint firstItem="uJN-x6-QE9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="xth-8x-vrU"/>
+                    <constraint firstAttribute="trailing" secondItem="Izm-FF-BIf" secondAttribute="trailing" constant="10" id="y4k-zC-Dzh"/>
+                    <constraint firstAttribute="bottom" secondItem="QTE-e5-Bgb" secondAttribute="bottom" id="zjJ-aT-Kyi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="newsImageView" destination="Xs8-1X-F6k" id="Nvz-Gg-iym"/>
+                <outlet property="newsTitleLabel" destination="Rg4-G3-OIq" id="ZHS-Yp-VfB"/>
+                <outlet property="subHeadTitleLabel" destination="uJN-x6-QE9" id="jn7-zF-jkm"/>
+            </connections>
+            <point key="canvasLocation" x="323" y="327"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Lab_Vote_New" width="57" height="47"/>
+        <image name="author_bg_default" width="375" height="199"/>
+    </resources>
+</document>

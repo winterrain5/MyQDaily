@@ -11,13 +11,13 @@ import AFNetworking
 class HomeNewsDataManager:AFHTTPSessionManager {
     
     static let shareInstance:HomeNewsDataManager = {
-        let baseUrl = NSURL(string: "http://app3.qdaily.com/app3/homes/index/")
+        let baseUrl = NSURL(string: "http://app3.qdaily.com/app3/")
         let instance = HomeNewsDataManager(baseURL: baseUrl, sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration())
         return instance
     }()
 
     func requestHomeNewDataWihtLastKey(lastkey:String,finished: (responseObject :[String: AnyObject]?, error :NSError?)->()) {
-        let path = "\(lastkey).json"
+        let path = "homes/index/\(lastkey).json"
         GET(path, parameters:nil, success: { (task, objc) -> Void in
             
            
@@ -36,7 +36,24 @@ class HomeNewsDataManager:AFHTTPSessionManager {
 
     }
     
-   
+    func requestHomeLabsDataWithLastKey(lastkey:String,finished: (responseObject :[String: AnyObject]?, error :NSError?)->()) {
+        let path = "papers/index/\(lastkey).json"
+        GET(path, parameters:nil, success: { (task, objc) -> Void in
+            
+            
+            guard let arr = (objc as! [String: AnyObject])["response"] as? [String: AnyObject] else {
+                
+                finished(responseObject: nil
+                    , error: NSError(domain: "com.520it.lnj", code: 1000, userInfo: ["messages":"没有获取到数据"]))
+                return
+            }
+            finished(responseObject: arr, error: nil)
+            
+            }) { (task, error) -> Void in
+                print(error)
+                finished(responseObject: nil, error: error)
+        }
+    }
     
 }
 

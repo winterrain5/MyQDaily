@@ -8,12 +8,12 @@
 
 import UIKit
 import pop
-protocol SuspensionViewDelegate:NSObjectProtocol
+@objc protocol SuspensionViewDelegate:NSObjectProtocol
 {
-    func popUpMenu()
-    func closeMenu()
-    func backHome()
-    func backToMenuView()
+    optional func popUpMenu()
+    optional func closeMenu()
+    optional func backHome()
+    optional func backToMenuView()
 }
 
 class SuspensionView: UIView {
@@ -84,7 +84,7 @@ class SuspensionView: UIView {
                             
                             // 弹出菜单的代理
                             if (self.delegate?.respondsToSelector(Selector("popUpMenu")) != nil) {
-                                self.delegate?.popUpMenu()
+                                self.delegate?.popUpMenu!()
                             }
                             return
                             
@@ -98,7 +98,7 @@ class SuspensionView: UIView {
                             self.style = .QDaily
                             // 关闭菜单代理
                             if (self.delegate?.respondsToSelector(Selector("closeMenu")) != nil) {
-                                self.delegate?.closeMenu()
+                                self.delegate?.closeMenu!()
                             }
                             return
                         }
@@ -111,7 +111,7 @@ class SuspensionView: UIView {
         if style == .NavBack {
             style = .QDaily
             if (self.delegate?.respondsToSelector(Selector("backHome")) != nil) {
-                self.delegate?.backHome()
+                self.delegate?.backHome!()
             }
             return
         }
@@ -119,7 +119,7 @@ class SuspensionView: UIView {
         // 返回到MenuView
         if style == .HomeBack{
             if (self.delegate?.respondsToSelector(Selector("backToMenuView")) != nil) {
-                self.delegate?.backToMenuView()
+                self.delegate?.backToMenuView!()
             }
             return
         }

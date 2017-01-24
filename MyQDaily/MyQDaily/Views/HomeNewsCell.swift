@@ -144,11 +144,11 @@ class HomeNewsCell: UITableViewCell {
         didSet {
             print("type == \(feedModel?.type)")
             cellType = feedModel?.type
-            newsTitleLabel?.text = feedModel?.post?.title
+            
             newsTypeLabel?.text = feedModel?.post?.category?.title
-//            timeLabel?.text = feedModel?.post?.publish_time
             commentLabel?.text = feedModel?.post?.comment_count
             praiseLabel?.text = feedModel?.post?.praise_count
+            newsTitleLabel?.text = feedModel?.post?.title
             subheadLabel?.text = feedModel?.post?.subhead
             if let nameStr = feedModel?.post?.image {
                 let url = NSURL(string: nameStr)

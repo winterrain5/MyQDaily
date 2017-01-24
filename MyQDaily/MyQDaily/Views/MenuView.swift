@@ -54,7 +54,7 @@ class MenuView: UIView {
         return array
         
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -69,27 +69,40 @@ class MenuView: UIView {
         blurEffectView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT)
         addSubview(blurEffectView)
         
+        // 头视图
         self.haderView = UIView()
         self.haderView?.backgroundColor = UIColor.clearColor()
         self.haderView?.frame = CGRectMake(0, -KHeaderViewH, SCREEN_WIDTH, KHeaderViewH)
         addSubview(self.haderView!)
         
+        // 菜单view的父view
         footerView = UIView()
         footerView?.backgroundColor = UIColor.clearColor()
         footerView?.frame = CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, SCREENH_HEIGHT - KHeaderViewH)
         addSubview(footerView!)
         
+        // 菜单view
         menuTableView = UITableView(frame: CGRectMake(0, 0, 190, SCREENH_HEIGHT - KHeaderViewH - 80), style: UITableViewStyle.Plain)
         menuTableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: Krid)
         menuTableView?.backgroundColor = UIColor.clearColor()
         menuTableView?.dataSource = self
         menuTableView?.delegate = self
-        
-        
         footerView?.addSubview(menuTableView!)
         
         // 设置button
         addHeadViewSubViews()
+        
+        // 新闻分类view
+        newsClassificationView = NewsClassificationView()
+        newsClassificationView?.frame = CGRectMake(SCREEN_WIDTH, KHeaderViewH, SCREEN_WIDTH, SCREENH_HEIGHT - KHeaderViewH)
+        // 隐藏自己 返回到menuView
+        newsClassificationView?.backBlock = { ()-> Void
+            in
+            if self.hideNewsClassificationViewBlock != nil {
+                self.hideNewsClassificationViewBlock!()
+            }
+        }
+        addSubview(newsClassificationView!)
     }
     
     private func addHeadViewSubViews() {
@@ -140,6 +153,59 @@ class MenuView: UIView {
     
     
     // pop动画
+    
+    
+    // 弹出新闻分类菜单
+    private func popupNewsCLassificatioViewAnimation() {
+        UIView.animateWithDuration(0.15, animations: { () -> Void in
+                self.changeMenuTableViewOffsetX(-SCREEN_WIDTH)
+            }) { (finished) -> Void in
+                let popSpring = POPSpringAnimation(propertyNamed: kPOPLayerPositionX)
+                popSpring.toValue = (self.newsClassificationView?.center.x)! - SCREEN_WIDTH
+                popSpring.beginTime = CACurrentMediaTime()
+                popSpring.springSpeed = 15
+                popSpring.springBounciness = 8
+                self.newsClassificationView?.pop_addAnimation(popSpring, forKey: "positionX")
+        }
+        
+    }
+    
+    // 隐藏新闻分类菜单
+    func hideNewsClassificationViewAnimation () {
+        newsClassificationView?.hideSuspensionView()
+        UIView.animateWithDuration(0.15, animations: { () -> Void in
+                UIView.animateWithDuration(0.15, animations: { () -> Void in
+                    self.changeNewsClassificationViewOffsetX(SCREEN_WIDTH)
+                })
+            }) { (finished) -> Void in
+                UIView.animateWithDuration(0.15, animations: { () -> Void in
+                        self.changeMenuTableViewOffsetX(10)
+                    }, completion: { (_) -> Void in
+                        UIView.animateWithDuration(0.15, animations: { () -> Void in
+                                self.changeMenuTableViewOffsetX(-5)
+                            }, completion: { (_) -> Void in
+                                UIView.animateWithDuration(0.1, animations: { () -> Void in
+                                    self.changeMenuTableViewOffsetX(0)
+                                })
+                        })
+                })
+        }
+    }
+    
+    // 改变menuTableView的x值
+    private func changeMenuTableViewOffsetX(offsetX: CGFloat) {
+        var tempFrame = self.menuTableView?.frame
+        tempFrame?.origin.x = offsetX
+        self.menuTableView?.frame = tempFrame!
+    }
+    
+    // 改变newsClassificationView的x值
+    private func changeNewsClassificationViewOffsetX(offsetX: CGFloat) {
+        var tempFrame = self.newsClassificationView?.frame
+        tempFrame?.origin.x = offsetX
+        self.newsClassificationView?.frame = tempFrame!
+    }
+    
     private func popAnimationWithView(view: UIView, offset:CGFloat, speed:CGFloat) {
         let popSpring = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
         popSpring.toValue = view.center.y + offset;
@@ -164,6 +230,19 @@ class MenuView: UIView {
     }
     
     // MARK: 外部方法
+    typealias cellDidSelectBlock = (methodName:String)->Void
+    
+    typealias menuViewBlcok = () -> Void
+    
+    var cellBlock:cellDidSelectBlock?
+    
+    var popupNewsClassificationViewBlock:menuViewBlcok?
+    var hideNewsClassificationViewBlock:menuViewBlcok?
+    
+    var mehtodNameArray:[String] = {
+        let array = ["aboutUs","newsClassification","paogramaCenter","curiosityResearch","myMessage","userCenter","homePage"]
+        return array
+    }()
     /**
     弹出菜单界面
     */
@@ -192,10 +271,7 @@ class MenuView: UIView {
         }
     }
     
-    // 隐藏新闻分类菜单
-    func hideNewsClassificationViewAnimation () {
-        
-    }
+  
 }
 
 extension MenuView: UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate
@@ -222,6 +298,23 @@ extension MenuView: UITableViewDataSource,UITableViewDelegate,UITextFieldDelegat
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
+        if cell.textLabel?.text == "新闻分类" {
+            popupNewsCLassificatioViewAnimation()
+            newsClassificationView?.popupSuspensionView()
+            if popupNewsClassificationViewBlock != nil {
+                self.popupNewsClassificationViewBlock!()
+            }
+        } else {
+            if cellBlock != nil {
+                cellBlock!(methodName:mehtodNameArray[indexPath.row])
+            }
+        }
+       
+
     }
     
     // MARK: UITextFieldDelegate

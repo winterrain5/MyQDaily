@@ -18,10 +18,7 @@ class HomeViewController: UITableViewController {
     // MARK: -属性
 //    private var homeNewsTableView:UITableView?
     /**model 数组*/
-    private lazy var contentArray:NSMutableArray = {
-        let array = NSMutableArray()
-        return array
-    }()
+    private lazy var contentArray:NSMutableArray = NSMutableArray()
     /** 是否还有未加载的文章 0：没有 1：有*/
     private var has_more:String?
     /** 拼接 到url 中的last_key*/
@@ -31,52 +28,30 @@ class HomeViewController: UITableViewController {
     
     
     private var responseModel:ResponsModel?
-    private lazy var feedsArray:[AnyObject] = {
-    
-        let array = [AnyObject]()
-        return array
-        
-    }()
-    private lazy var bannersArray:[AnyObject] = {
-        
-        let array = [AnyObject]()
-        return array
-    }()
-
-    private lazy var imageArray:[AnyObject] = {
-        
-        let array = [AnyObject]()
-        return array
-    }()
+    private lazy var feedsArray:[AnyObject] = [AnyObject]()
+    private lazy var bannersArray:[AnyObject] = [AnyObject]()
+    private lazy var imageArray:[AnyObject] = [AnyObject]()
 
     
     // 刷新控件
     private var refreshHeader:MJRefreshNormalHeader?
     private var refreshFooter:MJRefreshAutoNormalFooter?
+    private var sunRefrshView:YALSunnyRefreshControl = YALSunnyRefreshControl()
     private var cell:HomeNewsCell?
     
-    private var suspensionView:SuspensionView?
+   
     private var loopView:LoopView?
-    private var menuView:MenuView?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.whiteColor()
-    
-        contentArray = NSMutableArray()
-        feedsArray = [AnyObject]()
-        bannersArray = [AnyObject]()
-        imageArray = [AnyObject]()
-        
-        setupUI()
         
         refreshData()
-        
         // 设置下拉刷新
-        let refreshV = RefreshControlView()
-        refreshControl = refreshV
-        refreshControl?.addTarget(self, action: Selector("refreshData"), forControlEvents: UIControlEvents.ValueChanged)
+        sunRefrshView.addTarget(self, action: Selector("refreshData"), forControlEvents: UIControlEvents.ValueChanged)
+        sunRefrshView.attachToScrollView(self.tableView)
         
         
         // 设置上拉加载
@@ -90,34 +65,8 @@ class HomeViewController: UITableViewController {
         
      
     }
-    
-    override func viewWillAppear(animated: Bool) {
-         super.viewWillAppear(animated)
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//        automaticallyAdjustsScrollViewInsets = false
-        
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        suspensionView?.removeFromSuperview()
-    }
-    
-  
-    
-     private func setupUI() {
-        
-        
-        suspensionView = SuspensionView()
-        let window = UIApplication.sharedApplication().keyWindow
-        window!.addSubview(suspensionView!)
-        suspensionView?.frame = CGRectMake(10, SCREENH_HEIGHT - 70, 54, 54)
-        suspensionView?.delegate  = self
-        suspensionView?.style = .QDaily
-        
-        menuView = MenuView()
-        menuView?.frame = view.bounds
-    }
-    
+
+ 
     // 上拉加载
     private func loadData() {
         
@@ -155,10 +104,8 @@ class HomeViewController: UITableViewController {
         
         // 清空数据
         contentArray.removeAllObjects()
-        MBProgressHUD.showLoadView(view, str: "加载中")
         HomeNewsDataManager.shareInstance.requestHomeNewDataWihtLastKey("0") { (responseObject, error) -> () in
             
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
             if (error != nil) {
                 MBProgressHUD.promptHudWithShowHUDAddedTo(self.view, message: "加载失败")
                 return
@@ -177,7 +124,7 @@ class HomeViewController: UITableViewController {
                     // 获取banner数组
                     self.bannersArray = BannerModel.mj_objectArrayWithKeyValuesArray(tempDict["banners"]) as [AnyObject]
                     
-                    self.refreshControl?.endRefreshing()
+                    self.sunRefrshView.endRefreshing()
                     self.refreshFooter?.endRefreshing()
                     
                     // 添加轮播图
@@ -223,14 +170,14 @@ class HomeViewController: UITableViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let feedModel = contentArray[indexPath.row]
+        
         
         let rid = "homeCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(rid) as? HomeNewsCell
         if cell == nil {
             cell = HomeNewsCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: rid)
         }
-        
+        let feedModel = contentArray[indexPath.row]
         cell?.feedModel = feedModel as? FeedsModel
         self.cell = cell
         cell!.selectionStyle = UITableViewCellSelectionStyle.None
@@ -267,22 +214,8 @@ override
 }
 
 
-extension HomeViewController:LoopViewDelegate,SuspensionViewDelegate
+extension HomeViewController:LoopViewDelegate
 {
     
-    // MARK: SuspensionViewDelegate
-    func popUpMenu() {
-        let window = UIApplication.sharedApplication().keyWindow
-        window!.insertSubview(menuView!, belowSubview:suspensionView!)
-        menuView?.popupMunuViewAnimation()
-    }
-    func closeMenu() {
-        menuView?.hideMenuViewAnimation()
-    }
-    func backHome() {
-        
-    }
-    func backToMenuView() {
-        
-    }
+  
 }
