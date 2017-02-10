@@ -124,6 +124,11 @@ class PageViewController: UIPageViewController {
     }
     
     func userCenter() {
+        let vc = UserCenterViewController()
+       
+        presentViewController(vc, animated: true, completion: nil)
+        
+        menuView?.hideMenuViewAnimation()
         print("\(__FUNCTION__)")
 
     }

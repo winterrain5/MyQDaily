@@ -65,7 +65,10 @@ class HomeViewController: UITableViewController {
         
      
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+         super.viewWillAppear(animated)
+    }
  
     // 上拉加载
     private func loadData() {
@@ -101,7 +104,7 @@ class HomeViewController: UITableViewController {
     
     // 下拉刷新
    @objc private func refreshData() {
-        
+        print("1111")
         // 清空数据
         contentArray.removeAllObjects()
         HomeNewsDataManager.shareInstance.requestHomeNewDataWihtLastKey("0") { (responseObject, error) -> () in
@@ -125,12 +128,11 @@ class HomeViewController: UITableViewController {
                     self.bannersArray = BannerModel.mj_objectArrayWithKeyValuesArray(tempDict["banners"]) as [AnyObject]
                     
                     self.sunRefrshView.endRefreshing()
-                    self.refreshFooter?.endRefreshing()
+                    
+                    self.tableView.reloadData()
                     
                     // 添加轮播图
                     self.addLoopView()
-                    
-                    self.tableView.reloadData()
                 } else {
                     MBProgressHUD.promptHudWithShowHUDAddedTo(self.view, message: "加载失败")
                     return

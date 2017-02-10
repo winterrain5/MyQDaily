@@ -18,6 +18,7 @@ PODS:
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
   - pop (1.0.9)
+  - PureLayout (3.0.2)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - pop
+  - PureLayout
   - SDWebImage
   - SnapKit (~> 0.18.0)
 
@@ -38,9 +40,10 @@ SPEC CHECKSUMS:
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: e1f090a6d47b1dd4bd89b73f72b6746a7835ef3c
 
-PODFILE CHECKSUM: 5a7b7cc8945079f1d97a1ac6f36a4ddfb049d5cf
+PODFILE CHECKSUM: cb7e79375437ce5d45b8cc8cdb7cbb0b11ff4249
 
 COCOAPODS: 1.2.0.beta.1
