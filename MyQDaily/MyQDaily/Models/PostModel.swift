@@ -27,7 +27,7 @@ class PostModel: NSObject {
     
     var category:CategoryModel?
     
-    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override static func mj_replacedKeyFromPropertyName() -> [AnyHashable: Any]! {
         return ["subhead":"description"]
     }
 }

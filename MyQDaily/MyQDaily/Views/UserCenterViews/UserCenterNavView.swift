@@ -13,27 +13,27 @@ class UserCenterNavView: UIView {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     class func userCenterNavView() -> UserCenterNavView {
-        return NSBundle.mainBundle().loadNibNamed("UserCenterNavView", owner: nil, options: nil).last as! UserCenterNavView
+        return Bundle.main.loadNibNamed("UserCenterNavView", owner: nil, options: nil)!.last as! UserCenterNavView
     }
     
-    func updateRadiousWithProgress(progress: CGFloat) {
+    func updateRadiousWithProgress(_ progress: CGFloat) {
         titleLabel.textColor = UIColor.init(white: (1-progress), alpha: 1)
         backButton.titleLabel?.textColor = UIColor.init(white: (1-progress), alpha: 1)
         if progress > 0.7 {
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.backgroundColor = UIColor.whiteColor()
+            UIView.animate(withDuration: 0.5, animations: { () -> Void in
+                self.backgroundColor = UIColor.white
             })
         }
         
         if progress < 0.7 && progress > 0 {
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.backgroundColor = UIColor.clearColor()
+            UIView.animate(withDuration: 0.5, animations: { () -> Void in
+                self.backgroundColor = UIColor.clear
             })
         }
         
     }
 
-    @IBAction func backBtnClick(sender: UIButton) {
+    @IBAction func backBtnClick(_ sender: UIButton) {
         if dismissBlock != nil {
             dismissBlock!()
         }

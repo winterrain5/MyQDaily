@@ -11,24 +11,24 @@ import MBProgressHUD
 
 extension MBProgressHUD {
     
-    class func promptHudWithShowHUDAddedTo(promptView:UIView,message:String) {
+    class func promptHudWithShowHUDAddedTo(_ promptView:UIView,message:String) {
         var hud = MBProgressHUD()
-        hud = MBProgressHUD.showHUDAddedTo(promptView, animated: true)
-        hud.mode = MBProgressHUDMode.Text
-        hud.bezelView.backgroundColor = UIColor.blackColor()
-        hud.contentColor = UIColor.whiteColor()
-        hud.animationType = MBProgressHUDAnimation.Zoom
+        hud = MBProgressHUD.showAdded(to: promptView, animated: true)
+        hud.mode = MBProgressHUDMode.text
+        hud.bezelView.backgroundColor = UIColor.black
+        hud.contentColor = UIColor.white
+        hud.animationType = MBProgressHUDAnimation.zoom
         hud.label.text = message
-        hud.hideAnimated(true , afterDelay: 1.2)
+        hud.hide(animated: true , afterDelay: 1.2)
     }
     
-    class func showLoadView(view:UIView,str:String) {
+    class func showLoadView(_ view:UIView,str:String) {
         var hud = MBProgressHUD()
-        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = MBProgressHUDMode.Indeterminate
-        hud.bezelView.backgroundColor = UIColor.blackColor()
-        hud.contentColor = UIColor.whiteColor()
-        hud.animationType = MBProgressHUDAnimation.Zoom
+        hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud.mode = MBProgressHUDMode.indeterminate
+        hud.bezelView.backgroundColor = UIColor.black
+        hud.contentColor = UIColor.white
+        hud.animationType = MBProgressHUDAnimation.zoom
        
     }
     

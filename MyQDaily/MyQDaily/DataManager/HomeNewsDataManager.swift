@@ -11,47 +11,47 @@ import AFNetworking
 class HomeNewsDataManager:AFHTTPSessionManager {
     
     static let shareInstance:HomeNewsDataManager = {
-        let baseUrl = NSURL(string: "http://app3.qdaily.com/app3/")
-        let instance = HomeNewsDataManager(baseURL: baseUrl, sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        let baseUrl = URL(string: "http://app3.qdaily.com/app3/")
+        let instance = HomeNewsDataManager(baseURL: baseUrl, sessionConfiguration: URLSessionConfiguration.default)
         return instance
     }()
 
-    func requestHomeNewDataWihtLastKey(lastkey:String,finished: (responseObject :[String: AnyObject]?, error :NSError?)->()) {
+    func requestHomeNewDataWihtLastKey(_ lastkey:String,finished: @escaping (_ responseObject :[String: AnyObject]?, _ error :NSError?)->()) {
         let path = "homes/index/\(lastkey).json"
-        GET(path, parameters:nil, success: { (task, objc) -> Void in
+        get(path, parameters:nil, success: { (task, objc) -> Void in
             
            
             guard let arr = (objc as! [String: AnyObject])["response"] as? [String: AnyObject] else {
                 
-                finished(responseObject: nil
-                    , error: NSError(domain: "com.520it.lnj", code: 1000, userInfo: ["messages":"没有获取到数据"]))
+                finished(nil
+                    , NSError(domain: "com.520it.lnj", code: 1000, userInfo: ["messages":"没有获取到数据"]))
                 return
             }
-            finished(responseObject: arr, error: nil)
+            finished(arr, nil)
             
             }) { (task, error) -> Void in
                 print(error)
-                finished(responseObject: nil, error: error)
+                finished(nil, error as NSError?)
         }
 
     }
     
-    func requestHomeLabsDataWithLastKey(lastkey:String,finished: (responseObject :[String: AnyObject]?, error :NSError?)->()) {
+    func requestHomeLabsDataWithLastKey(_ lastkey:String,finished: @escaping (_ responseObject :[String: AnyObject]?, _ error :NSError?)->()) {
         let path = "papers/index/\(lastkey).json"
-        GET(path, parameters:nil, success: { (task, objc) -> Void in
+        get(path, parameters:nil, success: { (task, objc) -> Void in
             
             
             guard let arr = (objc as! [String: AnyObject])["response"] as? [String: AnyObject] else {
                 
-                finished(responseObject: nil
-                    , error: NSError(domain: "com.520it.lnj", code: 1000, userInfo: ["messages":"没有获取到数据"]))
+                finished(nil
+                    , NSError(domain: "com.520it.lnj", code: 1000, userInfo: ["messages":"没有获取到数据"]))
                 return
             }
-            finished(responseObject: arr, error: nil)
+            finished(arr, nil)
             
             }) { (task, error) -> Void in
                 print(error)
-                finished(responseObject: nil, error: error)
+                finished(nil, error as NSError?)
         }
     }
     

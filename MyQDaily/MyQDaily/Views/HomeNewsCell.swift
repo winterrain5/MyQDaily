@@ -14,26 +14,26 @@ class HomeNewsCell: UITableViewCell {
 
     // MARK: -内部属性和方法
     // 分割线
-    private var cellSepator:UIView?
+    fileprivate var cellSepator:UIView?
     // 新闻图片
-    private var newsImageView:UIImageView?
+    fileprivate var newsImageView:UIImageView?
     // 标题
-    private var newsTitleLabel:UILabel?
+    fileprivate var newsTitleLabel:UILabel?
     // 子标题
-    private var subheadLabel:UILabel?
+    fileprivate var subheadLabel:UILabel?
     // 评论图片
-    private var commentImageView:UIImageView?
+    fileprivate var commentImageView:UIImageView?
     // 点赞图片
-    private var praiseImageView:UIImageView?
+    fileprivate var praiseImageView:UIImageView?
     
     // 新闻类型
-    private var newsTypeLabel:UILabel?
+    fileprivate var newsTypeLabel:UILabel?
     // 评论数
-    private var commentLabel:UILabel?
+    fileprivate var commentLabel:UILabel?
     // 点赞数
-    private var praiseLabel:UILabel?
+    fileprivate var praiseLabel:UILabel?
     // 新闻发布时间
-    private var timeLabel:UILabel?
+    fileprivate var timeLabel:UILabel?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,7 +44,7 @@ class HomeNewsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    fileprivate func setupUI() {
         newsImageView = UIImageView()
         contentView.addSubview(newsImageView!)
         
@@ -56,31 +56,31 @@ class HomeNewsCell: UITableViewCell {
         
         subheadLabel = UILabel()
         subheadLabel?.font = UIFont(name: "Helvetica", size: 15.0)
-        subheadLabel?.textColor = UIColor.grayColor()
+        subheadLabel?.textColor = UIColor.gray
         subheadLabel?.numberOfLines = 3
         contentView.addSubview(subheadLabel!)
         
         newsTypeLabel = UILabel()
-        newsTypeLabel?.font = UIFont.systemFontOfSize(12.0)
-        newsTypeLabel?.textColor = UIColor.grayColor()
+        newsTypeLabel?.font = UIFont.systemFont(ofSize: 12.0)
+        newsTypeLabel?.textColor = UIColor.gray
         contentView .addSubview(newsTypeLabel!)
         
         commentLabel = UILabel()
-        commentLabel?.textAlignment = NSTextAlignment.Center
-        commentLabel?.font = UIFont.systemFontOfSize(13.0)
-        commentLabel?.textColor = UIColor.grayColor()
+        commentLabel?.textAlignment = NSTextAlignment.center
+        commentLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        commentLabel?.textColor = UIColor.gray
         contentView .addSubview(commentLabel!)
         
         praiseLabel = UILabel()
-        praiseLabel?.textAlignment = NSTextAlignment.Center
-        praiseLabel?.font = UIFont.systemFontOfSize(13.0)
-        praiseLabel?.textColor = UIColor.grayColor()
+        praiseLabel?.textAlignment = NSTextAlignment.center
+        praiseLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        praiseLabel?.textColor = UIColor.gray
         contentView .addSubview(praiseLabel!)
         
         timeLabel = UILabel()
-        timeLabel?.textAlignment = NSTextAlignment.Center
-        timeLabel?.font = UIFont.systemFontOfSize(13.0)
-        timeLabel?.textColor = UIColor.grayColor()
+        timeLabel?.textAlignment = NSTextAlignment.center
+        timeLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        timeLabel?.textColor = UIColor.gray
         contentView .addSubview(timeLabel!)
         
         cellSepator = UIView()
@@ -102,38 +102,38 @@ class HomeNewsCell: UITableViewCell {
         layoutUI()
     }
     
-    private func layoutUI() {
-        let  CELL_SCREEN_WIDTH  = UIScreen.mainScreen().bounds.size.width//屏幕宽度
-        cellSepator?.frame = CGRectMake(0, 0, CELL_SCREEN_WIDTH, 5)
+    fileprivate func layoutUI() {
+        let  CELL_SCREEN_WIDTH  = UIScreen.main.bounds.size.width//屏幕宽度
+        cellSepator?.frame = CGRect(x: 0, y: 0, width: CELL_SCREEN_WIDTH, height: 5)
         
         if cellType != "0" {
-            newsTypeLabel?.frame = CGRectMake(15, contentView.frame.size.height - 24, 30, 21)
-            commentImageView?.frame = CGRectMake(CGRectGetMaxX((newsTypeLabel?.frame)!), CGRectGetMinY((newsTypeLabel?.frame)!), 12.5, 11.5)
+            newsTypeLabel?.frame = CGRect(x: 15, y: contentView.frame.size.height - 24, width: 30, height: 21)
+            commentImageView?.frame = CGRect(x: (newsTypeLabel?.frame)!.maxX, y: (newsTypeLabel?.frame)!.minY, width: 12.5, height: 11.5)
             
-            commentLabel?.frame = CGRectMake(CGRectGetMaxX((commentImageView?.frame)!), CGRectGetMinY((newsTypeLabel?.frame)!), 30, 21)
+            commentLabel?.frame = CGRect(x: (commentImageView?.frame)!.maxX, y: (newsTypeLabel?.frame)!.minY, width: 30, height: 21)
             
-            praiseImageView?.frame = CGRectMake(CGRectGetMaxX((commentLabel?.frame)!) + 3, CGRectGetMinY((newsTypeLabel?.frame)!), 13, 11.5)
+            praiseImageView?.frame = CGRect(x: (commentLabel?.frame)!.maxX + 3, y: (newsTypeLabel?.frame)!.minY, width: 13, height: 11.5)
             
-            praiseLabel?.frame = CGRectMake(CGRectGetMaxX((praiseImageView?.frame)!), CGRectGetMinY((newsTypeLabel?.frame)!), 30, 21)
+            praiseLabel?.frame = CGRect(x: (praiseImageView?.frame)!.maxX, y: (newsTypeLabel?.frame)!.minY, width: 30, height: 21)
            
         }
         if cellType == "1" {
-            newsTitleLabel?.frame = CGRectMake(15, 20, CELL_SCREEN_WIDTH / 2 - 40, 80)
-            newsImageView?.frame = CGRectMake(CGRectGetMaxX((newsTitleLabel?.frame)!) + 25, 5, CELL_SCREEN_WIDTH / 2, 125)
+            newsTitleLabel?.frame = CGRect(x: 15, y: 20, width: CELL_SCREEN_WIDTH / 2 - 40, height: 80)
+            newsImageView?.frame = CGRect(x: (newsTitleLabel?.frame)!.maxX + 25, y: 5, width: CELL_SCREEN_WIDTH / 2, height: 125)
         }
         if cellType != "1" {
-            newsImageView?.frame = CGRectMake(0, 5, SCREEN_WIDTH, 220)
-            newsTitleLabel?.frame = CGRectMake(20, 230, SCREEN_WIDTH - 40, 60)
-            subheadLabel?.frame = CGRectMake(20, 290, SCREEN_WIDTH - 40, 40)
+            newsImageView?.frame = CGRect(x: 0, y: 5, width: SCREEN_WIDTH, height: 220)
+            newsTitleLabel?.frame = CGRect(x: 20, y: 230, width: SCREEN_WIDTH - 40, height: 60)
+            subheadLabel?.frame = CGRect(x: 20, y: 290, width: SCREEN_WIDTH - 40, height: 40)
             
-            newsTypeLabel?.frame = CGRectMake(15, CGRectGetMaxY((subheadLabel?.frame)!) + 5, 30, 21)
-            commentImageView?.frame = CGRectMake(CGRectGetMaxX((newsTypeLabel?.frame)!), CGRectGetMinY((newsTypeLabel?.frame)!), 12.5, 11.5)
+            newsTypeLabel?.frame = CGRect(x: 15, y: (subheadLabel?.frame)!.maxY + 5, width: 30, height: 21)
+            commentImageView?.frame = CGRect(x: (newsTypeLabel?.frame)!.maxX, y: (newsTypeLabel?.frame)!.minY, width: 12.5, height: 11.5)
             
-            commentLabel?.frame = CGRectMake(CGRectGetMaxX((commentImageView?.frame)!), CGRectGetMinY((newsTypeLabel?.frame)!), 30, 21)
+            commentLabel?.frame = CGRect(x: (commentImageView?.frame)!.maxX, y: (newsTypeLabel?.frame)!.minY, width: 30, height: 21)
             
-            praiseImageView?.frame = CGRectMake(CGRectGetMaxX((commentLabel?.frame)!) + 3, CGRectGetMinY((newsTypeLabel?.frame)!), 13, 11.5)
+            praiseImageView?.frame = CGRect(x: (commentLabel?.frame)!.maxX + 3, y: (newsTypeLabel?.frame)!.minY, width: 13, height: 11.5)
             
-            praiseLabel?.frame = CGRectMake(CGRectGetMaxX((praiseImageView?.frame)!), CGRectGetMinY((newsTypeLabel?.frame)!), 30, 21)
+            praiseLabel?.frame = CGRect(x: (praiseImageView?.frame)!.maxX, y: (newsTypeLabel?.frame)!.minY, width: 30, height: 21)
         }
     }
     
@@ -151,14 +151,14 @@ class HomeNewsCell: UITableViewCell {
             newsTitleLabel?.text = feedModel?.post?.title
             subheadLabel?.text = feedModel?.post?.subhead
             if let nameStr = feedModel?.post?.image {
-                let url = NSURL(string: nameStr)
-                let manager = SDWebImageManager.sharedManager()
-                newsImageView?.sd_setImageWithURL(url, placeholderImage: UIImage(named: "feedback_placeholder"), options: SDWebImageOptions.RefreshCached, completed: { (image, error, cachType, url) -> Void in
-                    if manager.diskImageExistsForURL(url)  {// 缓存中有 不再加载
+                let url = URL(string: nameStr)
+                let manager = SDWebImageManager.shared()
+                newsImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "feedback_placeholder"), options: SDWebImageOptions.refreshCached, completed: { (image, error, cachType, url) -> Void in
+                    if (manager?.diskImageExists(for: url))!  {// 缓存中有 不再加载
                         return
                     } else {
                         self.newsImageView?.alpha = 0.0
-                        UIView.transitionWithView(self.newsImageView!, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+                        UIView.transition(with: self.newsImageView!, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: { () -> Void in
                             self.newsImageView?.alpha = 1.0
                             }, completion: nil)
                     }

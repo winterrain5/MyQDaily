@@ -7,14 +7,13 @@
 //
 
 import UIKit
-import SnapKit
 import QuartzCore
 class UserCenterHeaderView: UIView {
 
-    private var backgroundImageView:UIImageView?
-    private var avatarImageView:UIImageView?
-    private var desclael:UILabel?
-    private var blurView:FXBlurView?
+    fileprivate var backgroundImageView:UIImageView?
+    fileprivate var avatarImageView:UIImageView?
+    fileprivate var desclael:UILabel?
+    fileprivate var blurView:FXBlurView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,33 +24,23 @@ class UserCenterHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    fileprivate func setupUI() {
         
         backgroundImageView = UIImageView()
         addSubview(backgroundImageView!)
-        backgroundImageView?.snp_makeConstraints(closure: { (make) -> Void in
-            make.left.equalTo(self.snp_left)
-            make.right.equalTo(self.snp_right)
-            make.top.equalTo(self.snp_top)
-            make.bottom.equalTo(self.snp_bottom)
-        })
+       
         backgroundImageView?.image = UIImage(named: "1")
-        backgroundImageView?.contentMode = UIViewContentMode.ScaleAspectFill
+        backgroundImageView?.contentMode = UIViewContentMode.scaleAspectFill
         
         
         blurView = FXBlurView()
-        blurView?.frame = CGRectMake(0, 0, SCREEN_WIDTH, KUserHeaderViewH)
+        blurView?.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: KUserHeaderViewH)
         blurView?.blurRadius = 0
         backgroundImageView?.addSubview(blurView!)
-        blurView?.snp_makeConstraints(closure: { (make) -> Void in
-            make.left.equalTo(self.snp_left)
-            make.right.equalTo(self.snp_right)
-            make.top.equalTo(self.snp_top)
-            make.bottom.equalTo(self.snp_bottom)
-        })
+       
     }
     
-    func updateRadiousWithProgress(progress: CGFloat) {
+    func updateRadiousWithProgress(_ progress: CGFloat) {
         print(progress)
         if progress < 0 {
             return

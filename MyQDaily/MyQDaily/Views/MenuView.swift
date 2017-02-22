@@ -16,22 +16,22 @@ class MenuView: UIView {
     
     // MARK: -内部方法
     /**模糊效果层*/
-    private var blurEffectView:UIVisualEffectView = {
-        let effect = UIBlurEffect(style: UIBlurEffectStyle.ExtraLight)
+    fileprivate var blurEffectView:UIVisualEffectView = {
+        let effect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
         let blurV = UIVisualEffectView(effect: effect)
         return blurV
     }()
     /**上半部分设置按钮的父view*/
-    private var haderView:UIView?
+    fileprivate var haderView:UIView?
     /**下半部分菜单的父view*/
-    private var footerView:UIView?
+    fileprivate var footerView:UIView?
     
-    private var menuTableView:UITableView?
+    fileprivate var menuTableView:UITableView?
     /**新闻分类菜单界面*/
-    private var newsClassificationView:NewsClassificationView?
+    fileprivate var newsClassificationView:NewsClassificationView?
     
     /**菜单cell图片数组*/
-    private var imageArray:[String] = {
+    fileprivate var imageArray:[String] = {
         let array = ["menu_about",
             "menu_category",
             "menu_column",
@@ -43,7 +43,7 @@ class MenuView: UIView {
         
     }()
     /**菜单cell标题数组*/
-    private var titleArray:[String] = {
+    fileprivate var titleArray:[String] = {
         let array = ["关于我们",
             "新闻分类",
             "栏目中心",
@@ -65,26 +65,26 @@ class MenuView: UIView {
     }
     
     
-    private func setupUI() {
-        blurEffectView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT)
+    fileprivate func setupUI() {
+        blurEffectView.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREENH_HEIGHT)
         addSubview(blurEffectView)
         
         // 头视图
         self.haderView = UIView()
-        self.haderView?.backgroundColor = UIColor.clearColor()
-        self.haderView?.frame = CGRectMake(0, -KHeaderViewH, SCREEN_WIDTH, KHeaderViewH)
+        self.haderView?.backgroundColor = UIColor.clear
+        self.haderView?.frame = CGRect(x: 0, y: -KHeaderViewH, width: SCREEN_WIDTH, height: KHeaderViewH)
         addSubview(self.haderView!)
         
         // 菜单view的父view
         footerView = UIView()
-        footerView?.backgroundColor = UIColor.clearColor()
-        footerView?.frame = CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, SCREENH_HEIGHT - KHeaderViewH)
+        footerView?.backgroundColor = UIColor.clear
+        footerView?.frame = CGRect(x: 0, y: SCREENH_HEIGHT, width: SCREEN_WIDTH, height: SCREENH_HEIGHT - KHeaderViewH)
         addSubview(footerView!)
         
         // 菜单view
-        menuTableView = UITableView(frame: CGRectMake(0, 0, 190, SCREENH_HEIGHT - KHeaderViewH - 80), style: UITableViewStyle.Plain)
-        menuTableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: Krid)
-        menuTableView?.backgroundColor = UIColor.clearColor()
+        menuTableView = UITableView(frame: CGRect(x: 0, y: 0, width: 190, height: SCREENH_HEIGHT - KHeaderViewH - 80), style: UITableViewStyle.plain)
+        menuTableView?.register(UITableViewCell.self, forCellReuseIdentifier: Krid)
+        menuTableView?.backgroundColor = UIColor.clear
         menuTableView?.dataSource = self
         menuTableView?.delegate = self
         footerView?.addSubview(menuTableView!)
@@ -94,7 +94,7 @@ class MenuView: UIView {
         
         // 新闻分类view
         newsClassificationView = NewsClassificationView()
-        newsClassificationView?.frame = CGRectMake(SCREEN_WIDTH, KHeaderViewH, SCREEN_WIDTH, SCREENH_HEIGHT - KHeaderViewH)
+        newsClassificationView?.frame = CGRect(x: SCREEN_WIDTH, y: KHeaderViewH, width: SCREEN_WIDTH, height: SCREENH_HEIGHT - KHeaderViewH)
         // 隐藏自己 返回到menuView
         newsClassificationView?.backBlock = { ()-> Void
             in
@@ -105,18 +105,18 @@ class MenuView: UIView {
         addSubview(newsClassificationView!)
     }
     
-    private func addHeadViewSubViews() {
+    fileprivate func addHeadViewSubViews() {
         let textField = UITextField()
         textField.placeholder = "搜索"
-        textField.frame = CGRectMake(30, 50, SCREEN_WIDTH - 60, 34)
+        textField.frame = CGRect(x: 30, y: 50, width: SCREEN_WIDTH - 60, height: 34)
         let imageView = UIImageView(image: UIImage(named: "search_icon"))
         textField.leftView = imageView
-        textField.leftViewMode = UITextFieldViewMode.Always
-        textField.backgroundColor = UIColor.whiteColor()
+        textField.leftViewMode = UITextFieldViewMode.always
+        textField.backgroundColor = UIColor.white
         textField.alpha = 0.8
         textField.layer.cornerRadius = 3
         textField.layer.masksToBounds = true
-        textField.font = UIFont.systemFontOfSize(15)
+        textField.font = UIFont.systemFont(ofSize: 15)
         textField.delegate = self
         self.haderView?.addSubview(textField)
         
@@ -130,9 +130,9 @@ class MenuView: UIView {
             let btn = UIButton()
             let x = margin * CGFloat(i + 1) + width * CGFloat(i)
             let imageStr = iconNameArray[i] as String
-            btn.setImage(UIImage(named: imageStr), forState: UIControlState.Normal)
-            btn.backgroundColor = UIColor.clearColor()
-            btn.frame = CGRectMake(x, CGRectGetMaxY(textField.frame) + 25, width, height)
+            btn.setImage(UIImage(named: imageStr), for: UIControlState())
+            btn.backgroundColor = UIColor.clear
+            btn.frame = CGRect(x: x, y: textField.frame.maxY + 25, width: width, height: height)
             self.haderView?.addSubview(btn)
         }
         
@@ -140,12 +140,12 @@ class MenuView: UIView {
             let label = UILabel()
             let x = margin * CGFloat(i + 1) + width * CGFloat(i)
             let lableStr = titleArray[i] as String
-            label.backgroundColor = UIColor.clearColor()
-            label.frame = CGRectMake(x, CGRectGetMaxY(textField.frame) + 60, width, height)
+            label.backgroundColor = UIColor.clear
+            label.frame = CGRect(x: x, y: textField.frame.maxY + 60, width: width, height: height)
             label.text = lableStr
-            label.font = UIFont.systemFontOfSize(13)
-            label.textColor = UIColor.darkGrayColor()
-            label.textAlignment = NSTextAlignment.Center
+            label.font = UIFont.systemFont(ofSize: 13)
+            label.textColor = UIColor.darkGray
+            label.textAlignment = NSTextAlignment.center
             self.haderView?.addSubview(label)
         }
         
@@ -156,81 +156,81 @@ class MenuView: UIView {
     
     
     // 弹出新闻分类菜单
-    private func popupNewsCLassificatioViewAnimation() {
-        UIView.animateWithDuration(0.15, animations: { () -> Void in
+    fileprivate func popupNewsCLassificatioViewAnimation() {
+        UIView.animate(withDuration: 0.15, animations: { () -> Void in
                 self.changeMenuTableViewOffsetX(-SCREEN_WIDTH)
-            }) { (finished) -> Void in
-                let popSpring = POPSpringAnimation(propertyNamed: kPOPLayerPositionX)
+            }, completion: { (finished) -> Void in
+                let popSpring = POPSpringAnimation(propertyNamed: kPOPLayerPositionX)!
                 popSpring.toValue = (self.newsClassificationView?.center.x)! - SCREEN_WIDTH
                 popSpring.beginTime = CACurrentMediaTime()
                 popSpring.springSpeed = 15
                 popSpring.springBounciness = 8
-                self.newsClassificationView?.pop_addAnimation(popSpring, forKey: "positionX")
-        }
+                self.newsClassificationView?.pop_add(popSpring, forKey: "positionX")
+        }) 
         
     }
     
     // 隐藏新闻分类菜单
     func hideNewsClassificationViewAnimation () {
         newsClassificationView?.hideSuspensionView()
-        UIView.animateWithDuration(0.15, animations: { () -> Void in
-                UIView.animateWithDuration(0.15, animations: { () -> Void in
+        UIView.animate(withDuration: 0.15, animations: { () -> Void in
+                UIView.animate(withDuration: 0.15, animations: { () -> Void in
                     self.changeNewsClassificationViewOffsetX(SCREEN_WIDTH)
                 })
-            }) { (finished) -> Void in
-                UIView.animateWithDuration(0.15, animations: { () -> Void in
+            }, completion: { (finished) -> Void in
+                UIView.animate(withDuration: 0.15, animations: { () -> Void in
                         self.changeMenuTableViewOffsetX(10)
                     }, completion: { (_) -> Void in
-                        UIView.animateWithDuration(0.15, animations: { () -> Void in
+                        UIView.animate(withDuration: 0.15, animations: { () -> Void in
                                 self.changeMenuTableViewOffsetX(-5)
                             }, completion: { (_) -> Void in
-                                UIView.animateWithDuration(0.1, animations: { () -> Void in
+                                UIView.animate(withDuration: 0.1, animations: { () -> Void in
                                     self.changeMenuTableViewOffsetX(0)
                                 })
                         })
                 })
-        }
+        }) 
     }
     
     // 改变menuTableView的x值
-    private func changeMenuTableViewOffsetX(offsetX: CGFloat) {
+    fileprivate func changeMenuTableViewOffsetX(_ offsetX: CGFloat) {
         var tempFrame = self.menuTableView?.frame
         tempFrame?.origin.x = offsetX
         self.menuTableView?.frame = tempFrame!
     }
     
     // 改变newsClassificationView的x值
-    private func changeNewsClassificationViewOffsetX(offsetX: CGFloat) {
+    fileprivate func changeNewsClassificationViewOffsetX(_ offsetX: CGFloat) {
         var tempFrame = self.newsClassificationView?.frame
         tempFrame?.origin.x = offsetX
         self.newsClassificationView?.frame = tempFrame!
     }
     
-    private func popAnimationWithView(view: UIView, offset:CGFloat, speed:CGFloat) {
+    fileprivate func popAnimationWithView(_ view: UIView, offset:CGFloat, speed:CGFloat) {
         let popSpring = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
-        popSpring.toValue = view.center.y + offset;
-        popSpring.beginTime = CACurrentMediaTime();
-        popSpring.springBounciness = 11.0;
-        popSpring.springSpeed = speed;
-        view.pop_addAnimation(popSpring, forKey: "positionY")
+        popSpring?.toValue = view.center.y + offset;
+        popSpring?.beginTime = CACurrentMediaTime();
+        popSpring?.springBounciness = 11.0;
+        popSpring?.springSpeed = speed;
+        view.pop_add(popSpring, forKey: "positionY")
     }
     
     // 改变headerView的Y值
-    private func headerViewOffsetY(offsetY:CGFloat) {
+    fileprivate func headerViewOffsetY(_ offsetY:CGFloat) {
         var tempFrame = haderView?.frame
         tempFrame?.origin.y = offsetY
         haderView?.frame = tempFrame!
     }
     
     // 改变footerView的Y值
-    private func footerViewOffsetY(offsetY:CGFloat) {
+    fileprivate func footerViewOffsetY(_ offsetY:CGFloat) {
         var tempFrame = footerView?.frame
         tempFrame?.origin.y = offsetY
         footerView?.frame = tempFrame!
     }
     
     // MARK: 外部方法
-    typealias cellDidSelectBlock = (methodName:String)->Void
+    typealias cellDidSelectBlock = (_ methodName:String)->Void
     
     typealias menuViewBlcok = () -> Void
     
@@ -248,7 +248,7 @@ class MenuView: UIView {
     */
     func popupMunuViewAnimation() {
         // 显示menuView
-        hidden = false
+        isHidden = false
         
         if -KHeaderViewH == self.haderView?.layer.frame.origin.y {
             self.popAnimationWithView(self.haderView!, offset: KHeaderViewH, speed: 15)
@@ -262,13 +262,13 @@ class MenuView: UIView {
      隐藏菜单
      */
     func hideMenuViewAnimation() {
-        UIView.animateWithDuration(0.1, animations: { () -> Void in
+        UIView.animate(withDuration: 0.1, animations: { () -> Void in
                 self.headerViewOffsetY(-KHeaderViewH)
                 self.footerViewOffsetY(SCREENH_HEIGHT)
-            }) { (finished) -> Void in
+            }, completion: { (finished) -> Void in
                 // 隐藏menuView
-                self.hidden = true
-        }
+                self.isHidden = true
+        }) 
     }
     
   
@@ -276,32 +276,32 @@ class MenuView: UIView {
 
 extension MenuView: UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate
 {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          return imageArray.count
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(Krid)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: Krid)
         if cell == nil {
-            cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: Krid)
+            cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: Krid)
         }
         
         cell?.textLabel?.text = titleArray[indexPath.row]
-        cell?.textLabel?.textColor = UIColor.darkGrayColor()
-        cell?.backgroundColor = UIColor.clearColor()
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        cell?.selectionStyle = UITableViewCellSelectionStyle.None
+        cell?.textLabel?.textColor = UIColor.darkGray
+        cell?.backgroundColor = UIColor.clear
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        cell?.selectionStyle = UITableViewCellSelectionStyle.none
         cell?.imageView?.image = UIImage(named:imageArray[indexPath.row])
         if indexPath.row == 1 {
-            cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         }
         return cell!
     }
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)! as UITableViewCell
         if cell.textLabel?.text == "新闻分类" {
             popupNewsCLassificatioViewAnimation()
             newsClassificationView?.popupSuspensionView()
@@ -310,7 +310,7 @@ extension MenuView: UITableViewDataSource,UITableViewDelegate,UITextFieldDelegat
             }
         } else {
             if cellBlock != nil {
-                cellBlock!(methodName:mehtodNameArray[indexPath.row])
+                cellBlock!(mehtodNameArray[indexPath.row])
             }
         }
        
@@ -318,7 +318,7 @@ extension MenuView: UITableViewDataSource,UITableViewDelegate,UITextFieldDelegat
     }
     
     // MARK: UITextFieldDelegate
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         print("asdf")
     }
 }

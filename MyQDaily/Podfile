@@ -3,7 +3,7 @@ platform :ios, ‘9.0’
 target ‘MyQDaily' do
  use_frameworks!
 
-pod 'SnapKit', '~> 0.18.0'
+
 pod 'AFNetworking'
 pod 'MJRefresh'
 pod 'SDWebImage'

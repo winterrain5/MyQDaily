@@ -12,7 +12,7 @@ import UIKit
 extension NSObject {
     
     // 分享图片
-    func shareWithImage(vc: UIViewController, image: UIImage) {
+    func shareWithImage(_ vc: UIViewController, image: UIImage) {
         /*
         // 得到文件URL
         let fileURL = returnURLWithFileName(fileName);
@@ -28,22 +28,20 @@ extension NSObject {
         let activityVC = UIActivityViewController.init(activityItems: urlArray, applicationActivities: nil);
         
         // 屏蔽那些模块
-        let cludeActivitys = [
-            
-        ];
-        
-        // 排除活动类型
-        activityVC.excludedActivityTypes = cludeActivitys as? [String];
+//        let cludeActivitys: [String] = []
+//        
+//        // 排除活动类型
+//        activityVC.excludedActivityTypes = cludeActivitys as? [String] as! [UIActivityType]?;
         
         // 呈现分享界面
-        vc.presentViewController(activityVC, animated: true) {
+        vc.present(activityVC, animated: true) {
             
             //print("开始AirDrop分享");
         };
     }
     
     // 分享链接或者文字
-    func shareWithLinkText(vc:UIViewController, text: String) {
+    func shareWithLinkText(_ vc:UIViewController, text: String) {
         let urlArray = [text];
         
         
@@ -51,15 +49,13 @@ extension NSObject {
         
         
         // 屏蔽那些模块
-        let cludeActivitys = [
-            
-        ];
-        
-        // 排除活动类型
-        activityVC.excludedActivityTypes = cludeActivitys as? [String];
+//        let cludeActivitys: [String] = []
+//        
+//        // 排除活动类型
+//        activityVC.excludedActivityTypes = cludeActivitys as? [String] as! [UIActivityType]?;
         
         // 呈现分享界面
-        vc.presentViewController(activityVC, animated: true) {
+        vc.present(activityVC, animated: true) {
             
             //print("开始AirDrop分享");
         };
@@ -68,13 +64,13 @@ extension NSObject {
     
     // MARK: 返回文件的URL
     /// 返回文件的URL
-    private func returnURLWithFileName(fileName: String) -> NSURL {
+    fileprivate func returnURLWithFileName(_ fileName: String) -> URL {
         
-        let arr = fileName.componentsSeparatedByString(".");
+        let arr = fileName.components(separatedBy: ".");
         
-        let pathString = NSBundle.mainBundle().pathForResource(arr.first, ofType: arr[1]);
+        let pathString = Bundle.main.path(forResource: arr.first, ofType: arr[1]);
         
-        let fileURL = NSURL.fileURLWithPath(pathString!);
+        let fileURL = URL(fileURLWithPath: pathString!);
         
         return fileURL;
     }

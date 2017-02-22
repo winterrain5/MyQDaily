@@ -14,17 +14,17 @@ let KNavigationH:CGFloat = 108
 class UserCenterViewController: UIViewController {
 
     // MARK：-内部属性和方法
-    private var customHeaderView:UserCenterHeaderView?
-    private var customNavView:UserCenterNavView?
-    private var tableView:UITableView?
+    fileprivate var customHeaderView:UserCenterHeaderView?
+    fileprivate var customNavView:UserCenterNavView?
+    fileprivate var tableView:UITableView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         setupUI()
     }
 
-    private func setupUI() {
+    fileprivate func setupUI() {
         
         tableView = UITableView()
         tableView?.frame = view.bounds
@@ -33,16 +33,16 @@ class UserCenterViewController: UIViewController {
         view.addSubview(tableView!)
         
         customHeaderView = UserCenterHeaderView()
-        tableView?.setParallaxHeaderView(customHeaderView!, mode: VGParallaxHeaderMode.TopFill, height: KUserHeaderViewH)
+        tableView?.setParallaxHeader(customHeaderView!, mode: VGParallaxHeaderMode.topFill, height: KUserHeaderViewH)
         
         
         customNavView = UserCenterNavView.userCenterNavView()
-        customNavView?.backgroundColor = UIColor.clearColor()
-        customNavView?.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64)
+        customNavView?.backgroundColor = UIColor.clear
+        customNavView?.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 64)
         view.insertSubview(customNavView!, aboveSubview: tableView!)
         customNavView?.dismissBlock = { ()->() in
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             
         }
 
@@ -53,22 +53,22 @@ class UserCenterViewController: UIViewController {
 
 extension UserCenterViewController: UITableViewDataSource,UITableViewDelegate
 {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         tableView?.shouldPositionParallaxHeader()
         let progress = 1 - (tableView?.parallaxHeader.progress)!
         customNavView?.updateRadiousWithProgress(progress)
         customHeaderView?.updateRadiousWithProgress(progress)
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 100
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let rid = "centerCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(rid)
+        var cell = tableView.dequeueReusableCell(withIdentifier: rid)
         if cell == nil {
-            cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: rid)
+            cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: rid)
         }
         cell?.textLabel?.text = "第\(indexPath.row)个cell"
         return cell!

@@ -11,23 +11,23 @@ import Social
 
 protocol ReaderFooterViewDelegate:NSObjectProtocol
 {
-    func backbtnClick(view:ReaderFooterView)
+    func backbtnClick(_ view:ReaderFooterView)
     
-    func shareBtnClick(view:ReaderFooterView)
+    func shareBtnClick(_ view:ReaderFooterView)
 }
 
 
 class ReaderFooterView: UIView {
 
     // MARK: -内部属性
-    private var backBtn:UIButton?
-    private var commentBtn:UIButton?
-    private var likeBtn:UIButton?
-    private var shareBtn:UIButton?
+    fileprivate var backBtn:UIButton?
+    fileprivate var commentBtn:UIButton?
+    fileprivate var likeBtn:UIButton?
+    fileprivate var shareBtn:UIButton?
     
     
-    private var likeLabel:UILabel?
-    private var commentLabel:UILabel?
+    fileprivate var likeLabel:UILabel?
+    fileprivate var commentLabel:UILabel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,33 +43,33 @@ class ReaderFooterView: UIView {
         let width = SCREEN_WIDTH
         
         backBtn = UIButton()
-        backBtn?.frame = CGRectMake(15, 0, 40, height)
-        backBtn?.addTarget(self, action: Selector("backBtnClick"), forControlEvents: UIControlEvents.TouchUpInside)
+        backBtn?.frame = CGRect(x: 15, y: 0, width: 40, height: height)
+        backBtn?.addTarget(self, action: #selector(ReaderFooterView.backBtnClick), for: UIControlEvents.touchUpInside)
         addSubview(backBtn!)
         
         shareBtn = UIButton()
-        shareBtn?.frame = CGRectMake(width - 20 - 40, 5, 40, 40)
-        shareBtn?.addTarget(self, action: Selector("shareBtnClick"), forControlEvents: UIControlEvents.TouchUpInside)
+        shareBtn?.frame = CGRect(x: width - 20 - 40, y: 5, width: 40, height: 40)
+        shareBtn?.addTarget(self, action: #selector(ReaderFooterView.shareBtnClick), for: UIControlEvents.touchUpInside)
         addSubview(shareBtn!)
         
     
         likeBtn = UIButton()
-        likeBtn?.frame = CGRectMake(CGRectGetMinX((shareBtn?.frame)!) - 55, 8, 35, 35)
+        likeBtn?.frame = CGRect(x: (shareBtn?.frame)!.minX - 55, y: 8, width: 35, height: 35)
         addSubview(likeBtn!)
         
         likeLabel = UILabel()
-        likeLabel?.frame = CGRectMake(CGRectGetMaxX((likeBtn?.frame)!) - 5, 8, 20, 12)
-        likeLabel?.font = UIFont.systemFontOfSize(10)
+        likeLabel?.frame = CGRect(x: (likeBtn?.frame)!.maxX - 5, y: 8, width: 20, height: 12)
+        likeLabel?.font = UIFont.systemFont(ofSize: 10)
         likeLabel?.text = "21"
         addSubview(likeLabel!)
         
         commentBtn = UIButton()
-        commentBtn?.frame = CGRectMake(CGRectGetMinX((likeBtn?.frame)!) - 55, 8, 35, 35)
+        commentBtn?.frame = CGRect(x: (likeBtn?.frame)!.minX - 55, y: 8, width: 35, height: 35)
         addSubview(commentBtn!)
         
         commentLabel = UILabel()
-        commentLabel?.frame = CGRectMake(CGRectGetMaxX((commentBtn?.frame)!) - 5, 8, 20, 12)
-        commentLabel?.font = UIFont.systemFontOfSize(10)
+        commentLabel?.frame = CGRect(x: (commentBtn?.frame)!.maxX - 5, y: 8, width: 20, height: 12)
+        commentLabel?.font = UIFont.systemFont(ofSize: 10)
         commentLabel?.text = "21"
         addSubview(commentLabel!)
         
@@ -77,14 +77,14 @@ class ReaderFooterView: UIView {
     }
     
     // 返回事件
-    @objc private func backBtnClick() {
-        if delegate?.respondsToSelector(Selector("backbtnClick:")) != nil {
+    @objc fileprivate func backBtnClick() {
+        if delegate?.responds(to: Selector("backbtnClick:")) != nil {
             delegate?.backbtnClick(self)
         }
     }
     // 分享事件
-    @objc private func shareBtnClick() {
-        if delegate?.respondsToSelector(Selector("shareBtnClick:")) != nil {
+    @objc fileprivate func shareBtnClick() {
+        if delegate?.responds(to: Selector("shareBtnClick:")) != nil {
             delegate?.shareBtnClick(self)
         }
     }
@@ -94,21 +94,21 @@ class ReaderFooterView: UIView {
         didSet {
             if footerType == 1 { // 白色图片
                 
-                backBtn?.setImage(UIImage(named: "toolbarBack"), forState: UIControlState.Normal)
-                shareBtn?.setImage(UIImage(named: "toolbarShare_night"), forState: UIControlState.Normal)
-                likeBtn?.setImage(UIImage(named: "toolbarLike"), forState: UIControlState.Normal)
-                commentBtn?.setImage(UIImage(named: "toolbarComment"), forState: UIControlState.Normal)
-                likeLabel?.textColor = UIColor.whiteColor()
-                commentLabel?.textColor = UIColor.whiteColor()
+                backBtn?.setImage(UIImage(named: "toolbarBack"), for: UIControlState())
+                shareBtn?.setImage(UIImage(named: "toolbarShare_night"), for: UIControlState())
+                likeBtn?.setImage(UIImage(named: "toolbarLike"), for: UIControlState())
+                commentBtn?.setImage(UIImage(named: "toolbarComment"), for: UIControlState())
+                likeLabel?.textColor = UIColor.white
+                commentLabel?.textColor = UIColor.white
                 
             } else { // 黑色图片
                 
-                backBtn?.setImage(UIImage(named: "toolbarBackBlack"), forState: UIControlState.Normal)
-                shareBtn?.setImage(UIImage(named: "toolbarShareBlack"), forState: UIControlState.Normal)
-                likeBtn?.setImage(UIImage(named: "toolbarLikeBlack"), forState: UIControlState.Normal)
-                commentBtn?.setImage(UIImage(named: "toolbarCommentBlack"), forState: UIControlState.Normal)
-                likeLabel?.textColor = UIColor.blackColor()
-                commentLabel?.textColor = UIColor.blackColor()
+                backBtn?.setImage(UIImage(named: "toolbarBackBlack"), for: UIControlState())
+                shareBtn?.setImage(UIImage(named: "toolbarShareBlack"), for: UIControlState())
+                likeBtn?.setImage(UIImage(named: "toolbarLikeBlack"), for: UIControlState())
+                commentBtn?.setImage(UIImage(named: "toolbarCommentBlack"), for: UIControlState())
+                likeLabel?.textColor = UIColor.black
+                commentLabel?.textColor = UIColor.black
 
             }
         }

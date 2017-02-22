@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		2511CB641E31D8510028CFED /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2511CB631E31D8510028CFED /* MenuView.swift */; };
 		2511CB661E31E9D50028CFED /* NewsClassificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2511CB651E31E9D50028CFED /* NewsClassificationView.swift */; };
-		2511CB6B1E32FA1F0028CFED /* RefreshControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2511CB6A1E32FA1F0028CFED /* RefreshControlView.swift */; };
 		251238501E333BB400AABFAA /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512384F1E333BB400AABFAA /* PageViewController.swift */; };
 		251238521E333C5C00AABFAA /* CustomPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251238511E333C5C00AABFAA /* CustomPageView.swift */; };
 		251238571E33705C00AABFAA /* HomeLABSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251238561E33705C00AABFAA /* HomeLABSViewController.swift */; };
 		251B5C871E319FF000EE50E6 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 251B5C861E319FF000EE50E6 /* libz.1.tbd */; };
 		251B5C891E31AB2400EE50E6 /* NSObject+SystemShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251B5C881E31AB2400EE50E6 /* NSObject+SystemShare.swift */; };
+		2529760B1E5C817500B74C74 /* HomeLabsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252976081E5C817500B74C74 /* HomeLabsCell.swift */; };
+		2529760C1E5C817500B74C74 /* HomeLabsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252976091E5C817500B74C74 /* HomeLabsCell.xib */; };
+		2529760D1E5C817500B74C74 /* HomeNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2529760A1E5C817500B74C74 /* HomeNewsCell.swift */; };
+		2529760F1E5C886A00B74C74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2529760E1E5C886A00B74C74 /* AppDelegate.swift */; };
 		258024081E36F282004D85EC /* UserCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258024071E36F282004D85EC /* UserCenterHeaderView.swift */; };
 		2580240E1E36FD83004D85EC /* UserCenterNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2580240D1E36FD83004D85EC /* UserCenterNavView.swift */; };
 		258024101E36FE9E004D85EC /* UserCenterNavView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2580240F1E36FE9E004D85EC /* UserCenterNavView.xib */; };
@@ -24,10 +27,7 @@
 		2580241B1E374D06004D85EC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2580241A1E374D06004D85EC /* QuartzCore.framework */; };
 		259C307E1E35AB9E00375D26 /* YALSunnyRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 259C307C1E35AB9E00375D26 /* YALSunnyRefreshControl.m */; };
 		259C307F1E35AB9E00375D26 /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 259C307D1E35AB9E00375D26 /* YALSunnyRefreshControl.xib */; };
-		259C30821E35AEB000375D26 /* HomeLabsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C30801E35AEB000375D26 /* HomeLabsCell.swift */; };
-		259C30831E35AEB000375D26 /* HomeLabsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 259C30811E35AEB000375D26 /* HomeLabsCell.xib */; };
 		259C30851E35C35800375D26 /* UserCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C30841E35C35800375D26 /* UserCenterViewController.swift */; };
-		25CBD88F1E2E256700BA36B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CBD88E1E2E256700BA36B1 /* AppDelegate.swift */; };
 		25CBD8911E2E256700BA36B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CBD8901E2E256700BA36B1 /* ViewController.swift */; };
 		25CBD8941E2E256700BA36B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25CBD8921E2E256700BA36B1 /* Main.storyboard */; };
 		25CBD8961E2E256700BA36B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25CBD8951E2E256700BA36B1 /* Assets.xcassets */; };
@@ -37,7 +37,6 @@
 		25CBD9E51E2F00E900BA36B1 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 25CBD9E41E2F00E900BA36B1 /* Podfile */; };
 		25CBD9E71E2F052200BA36B1 /* NSString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CBD9E61E2F052200BA36B1 /* NSString+Extension.swift */; };
 		25CBD9EA1E2F159E00BA36B1 /* SuspensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CBD9E91E2F159E00BA36B1 /* SuspensionView.swift */; };
-		25CBD9EE1E2F2F3E00BA36B1 /* HomeNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CBD9ED1E2F2F3E00BA36B1 /* HomeNewsCell.swift */; };
 		25CBD9F11E2F595600BA36B1 /* HomeNewsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CBD9F01E2F595600BA36B1 /* HomeNewsDataManager.swift */; };
 		25E058171E2F66E9001C0C09 /* ResponsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E058161E2F66E9001C0C09 /* ResponsModel.swift */; };
 		25E058191E2F6883001C0C09 /* FeedsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E058181E2F6883001C0C09 /* FeedsModel.swift */; };
@@ -55,12 +54,15 @@
 		06F285BEEDAFF75E176F3235 /* Pods-MyQDaily.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyQDaily.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyQDaily/Pods-MyQDaily.release.xcconfig"; sourceTree = "<group>"; };
 		2511CB631E31D8510028CFED /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		2511CB651E31E9D50028CFED /* NewsClassificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsClassificationView.swift; sourceTree = "<group>"; };
-		2511CB6A1E32FA1F0028CFED /* RefreshControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControlView.swift; sourceTree = "<group>"; };
 		2512384F1E333BB400AABFAA /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		251238511E333C5C00AABFAA /* CustomPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPageView.swift; sourceTree = "<group>"; };
 		251238561E33705C00AABFAA /* HomeLABSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeLABSViewController.swift; sourceTree = "<group>"; };
 		251B5C861E319FF000EE50E6 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 		251B5C881E31AB2400EE50E6 /* NSObject+SystemShare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+SystemShare.swift"; sourceTree = "<group>"; };
+		252976081E5C817500B74C74 /* HomeLabsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeLabsCell.swift; path = MyQDaily/Views/HomeLabsCell.swift; sourceTree = SOURCE_ROOT; };
+		252976091E5C817500B74C74 /* HomeLabsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeLabsCell.xib; path = MyQDaily/Views/HomeLabsCell.xib; sourceTree = SOURCE_ROOT; };
+		2529760A1E5C817500B74C74 /* HomeNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeNewsCell.swift; path = MyQDaily/Views/HomeNewsCell.swift; sourceTree = SOURCE_ROOT; };
+		2529760E1E5C886A00B74C74 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = MyQDaily/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		258024071E36F282004D85EC /* UserCenterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCenterHeaderView.swift; sourceTree = "<group>"; };
 		2580240D1E36FD83004D85EC /* UserCenterNavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCenterNavView.swift; sourceTree = "<group>"; };
 		2580240F1E36FE9E004D85EC /* UserCenterNavView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCenterNavView.xib; sourceTree = "<group>"; };
@@ -75,11 +77,8 @@
 		259C307B1E35AB9E00375D26 /* YALSunnyRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YALSunnyRefreshControl.h; sourceTree = "<group>"; };
 		259C307C1E35AB9E00375D26 /* YALSunnyRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YALSunnyRefreshControl.m; sourceTree = "<group>"; };
 		259C307D1E35AB9E00375D26 /* YALSunnyRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YALSunnyRefreshControl.xib; sourceTree = "<group>"; };
-		259C30801E35AEB000375D26 /* HomeLabsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeLabsCell.swift; path = ../HomeLabsCell.swift; sourceTree = "<group>"; };
-		259C30811E35AEB000375D26 /* HomeLabsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeLabsCell.xib; path = ../HomeLabsCell.xib; sourceTree = "<group>"; };
 		259C30841E35C35800375D26 /* UserCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCenterViewController.swift; sourceTree = "<group>"; };
 		25CBD88B1E2E256700BA36B1 /* MyQDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyQDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		25CBD88E1E2E256700BA36B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		25CBD8901E2E256700BA36B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		25CBD8931E2E256700BA36B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		25CBD8951E2E256700BA36B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,7 +89,6 @@
 		25CBD9E41E2F00E900BA36B1 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		25CBD9E61E2F052200BA36B1 /* NSString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Extension.swift"; sourceTree = "<group>"; };
 		25CBD9E91E2F159E00BA36B1 /* SuspensionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuspensionView.swift; sourceTree = "<group>"; };
-		25CBD9ED1E2F2F3E00BA36B1 /* HomeNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeNewsCell.swift; path = ../HomeNewsCell.swift; sourceTree = "<group>"; };
 		25CBD9F01E2F595600BA36B1 /* HomeNewsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNewsDataManager.swift; sourceTree = "<group>"; };
 		25E058161E2F66E9001C0C09 /* ResponsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsModel.swift; sourceTree = "<group>"; };
 		25E058181E2F6883001C0C09 /* FeedsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsModel.swift; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 				259C307B1E35AB9E00375D26 /* YALSunnyRefreshControl.h */,
 				259C307C1E35AB9E00375D26 /* YALSunnyRefreshControl.m */,
 				259C307D1E35AB9E00375D26 /* YALSunnyRefreshControl.xib */,
-				2511CB6A1E32FA1F0028CFED /* RefreshControlView.swift */,
 				259C307A1E35AB9D00375D26 /* MyQDaily-Bridging-Header.h */,
 			);
 			path = Refresh;
@@ -163,9 +160,9 @@
 		259C30871E35C39500375D26 /* HomeCells */ = {
 			isa = PBXGroup;
 			children = (
-				25CBD9ED1E2F2F3E00BA36B1 /* HomeNewsCell.swift */,
-				259C30801E35AEB000375D26 /* HomeLabsCell.swift */,
-				259C30811E35AEB000375D26 /* HomeLabsCell.xib */,
+				252976081E5C817500B74C74 /* HomeLabsCell.swift */,
+				252976091E5C817500B74C74 /* HomeLabsCell.xib */,
+				2529760A1E5C817500B74C74 /* HomeNewsCell.swift */,
 			);
 			path = HomeCells;
 			sourceTree = "<group>";
@@ -214,7 +211,7 @@
 		25CBD8A01E2E258300BA36B1 /* Appdelegate */ = {
 			isa = PBXGroup;
 			children = (
-				25CBD88E1E2E256700BA36B1 /* AppDelegate.swift */,
+				2529760E1E5C886A00B74C74 /* AppDelegate.swift */,
 			);
 			path = Appdelegate;
 			sourceTree = "<group>";
@@ -335,6 +332,7 @@
 					25CBD88A1E2E256700BA36B1 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 46TQXUK8LF;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -363,11 +361,11 @@
 			files = (
 				259C307F1E35AB9E00375D26 /* YALSunnyRefreshControl.xib in Resources */,
 				25CBD8991E2E256700BA36B1 /* LaunchScreen.storyboard in Resources */,
-				259C30831E35AEB000375D26 /* HomeLabsCell.xib in Resources */,
 				25CBD8961E2E256700BA36B1 /* Assets.xcassets in Resources */,
 				25CBD9E51E2F00E900BA36B1 /* Podfile in Resources */,
 				258024101E36FE9E004D85EC /* UserCenterNavView.xib in Resources */,
 				25CBD8941E2E256700BA36B1 /* Main.storyboard in Resources */,
+				2529760C1E5C817500B74C74 /* HomeLabsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,26 +424,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2511CB6B1E32FA1F0028CFED /* RefreshControlView.swift in Sources */,
+				2529760D1E5C817500B74C74 /* HomeNewsCell.swift in Sources */,
 				251B5C891E31AB2400EE50E6 /* NSObject+SystemShare.swift in Sources */,
+				2529760B1E5C817500B74C74 /* HomeLabsCell.swift in Sources */,
 				259C307E1E35AB9E00375D26 /* YALSunnyRefreshControl.m in Sources */,
 				25E0581D1E2F6AAE001C0C09 /* CategoryModel.swift in Sources */,
 				25CBD8911E2E256700BA36B1 /* ViewController.swift in Sources */,
 				259C30851E35C35800375D26 /* UserCenterViewController.swift in Sources */,
 				2511CB641E31D8510028CFED /* MenuView.swift in Sources */,
 				25E0581B1E2F690E001C0C09 /* PostModel.swift in Sources */,
-				259C30821E35AEB000375D26 /* HomeLabsCell.swift in Sources */,
 				251238521E333C5C00AABFAA /* CustomPageView.swift in Sources */,
 				25E058191E2F6883001C0C09 /* FeedsModel.swift in Sources */,
 				25CBD9E71E2F052200BA36B1 /* NSString+Extension.swift in Sources */,
-				25CBD9EE1E2F2F3E00BA36B1 /* HomeNewsCell.swift in Sources */,
 				25E058241E30978D001C0C09 /* ReaderViewController.swift in Sources */,
 				258024081E36F282004D85EC /* UserCenterHeaderView.swift in Sources */,
 				258024191E371177004D85EC /* UIColor+CrossFade.m in Sources */,
-				25CBD88F1E2E256700BA36B1 /* AppDelegate.swift in Sources */,
 				258024131E370694004D85EC /* FXBlurView.m in Sources */,
 				25CBD9E11E2EFF5700BA36B1 /* MBProgressHUD+Extension.swift in Sources */,
 				251238501E333BB400AABFAA /* PageViewController.swift in Sources */,
+				2529760F1E5C886A00B74C74 /* AppDelegate.swift in Sources */,
 				25E0581F1E2F6AF9001C0C09 /* BannerModel.swift in Sources */,
 				25CBD9F11E2F595600BA36B1 /* HomeNewsDataManager.swift in Sources */,
 				251238571E33705C00AABFAA /* HomeLABSViewController.swift in Sources */,
@@ -601,6 +598,7 @@
 				PROVISIONING_PROFILE = "1fcb22c0-3f9c-461c-9d44-507392b7ee10";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyQDaily/Refresh/MyQDaily-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -639,6 +637,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1fcb22c0-3f9c-461c-9d44-507392b7ee10";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyQDaily/Refresh/MyQDaily-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

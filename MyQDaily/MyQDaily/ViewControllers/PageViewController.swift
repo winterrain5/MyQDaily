@@ -10,28 +10,28 @@ import UIKit
 
 class PageViewController: UIPageViewController {
 
-    private var pageView:CustomPageView?
+    fileprivate var pageView:CustomPageView?
     
-    private var suspensionView:SuspensionView?
-    private var menuView:MenuView?
+    fileprivate var suspensionView:SuspensionView?
+    fileprivate var menuView:MenuView?
     
-    private lazy var subViewControllers:NSMutableArray = {
+    fileprivate lazy var subViewControllers:NSMutableArray = {
         var array = NSMutableArray()
         let VC1 = HomeViewController()
         let VC2 = HomeLABSViewController()
-        array.addObject(VC1)
-        array.addObject(VC2)
+        array.add(VC1)
+        array.add(VC2)
         return array
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         let array:[String] = ["NEWS","LABS"]
         pageView = CustomPageView()
         pageView!.titleArray = array
-        pageView?.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT)
+        pageView?.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREENH_HEIGHT)
         pageView?.VCArray = subViewControllers
         pageView?.fatherVC = self
         view.addSubview(pageView!)
@@ -39,36 +39,36 @@ class PageViewController: UIPageViewController {
         setupUI()
     }
     
-    private func setupUI() {
+    fileprivate func setupUI() {
         
         
         suspensionView = SuspensionView()
-        suspensionView?.frame = CGRectMake(10, SCREENH_HEIGHT - 70, 54, 54)
+        suspensionView?.frame = CGRect(x: 10, y: SCREENH_HEIGHT - 70, width: 54, height: 54)
         suspensionView?.delegate  = self
-        suspensionView?.style = .QDaily
+        suspensionView?.style = .qDaily
         
         menuView = MenuView()
         menuView?.cellBlock = {(methodName:String) -> Void
             in
-            self.suspensionView?.style = .Close
+            self.suspensionView?.style = .close
             let method = NSSelectorFromString(methodName)
-            self.performSelector(method)
+            self.perform(method)
             self.menuView?.removeFromSuperview()
         }
         menuView?.popupNewsClassificationViewBlock = {()->Void in
-            self.suspensionView?.style = .HomeBack
+            self.suspensionView?.style = .homeBack
             self.changgeSuspensionViewOffsetX(-SCREEN_WIDTH - 100)
             
         }
         menuView?.hideNewsClassificationViewBlock = {()-> Void in
             self.menuView?.hideNewsClassificationViewAnimation()
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
                     self.changgeSuspensionViewOffsetX(15)
                 }, completion: { (_) -> Void in
-                    UIView.animateWithDuration(0.15, animations: { () -> Void in
+                    UIView.animate(withDuration: 0.15, animations: { () -> Void in
                             self.changgeSuspensionViewOffsetX(5)
                         }, completion: { (_) -> Void in
-                            UIView.animateWithDuration(0.1, animations: { () -> Void in
+                            UIView.animate(withDuration: 0.1, animations: { () -> Void in
                                 self.changgeSuspensionViewOffsetX(10)
                             })
                     })
@@ -78,21 +78,21 @@ class PageViewController: UIPageViewController {
         menuView?.frame = view.bounds
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
         automaticallyAdjustsScrollViewInsets = false
-        let window = UIApplication.sharedApplication().keyWindow
+        let window = UIApplication.shared.keyWindow
         window!.addSubview(suspensionView!)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         suspensionView?.removeFromSuperview()
     }
     
     // 改变悬浮按钮的x值
-    private func changgeSuspensionViewOffsetX(offsetX: CGFloat) {
+    fileprivate func changgeSuspensionViewOffsetX(_ offsetX: CGFloat) {
         var tempFrame = self.suspensionView?.frame
         tempFrame?.origin.x = offsetX
         self.suspensionView?.frame = tempFrame!
@@ -100,41 +100,41 @@ class PageViewController: UIPageViewController {
     
     
     func aboutUs() {
-        print("\(__FUNCTION__)")
+        print("\(#function)")
     }
     
     func newsClassification() {
-        print("\(__FUNCTION__)")
+        print("\(#function)")
 
     }
     
     func paogramaCenter() {
-        print("\(__FUNCTION__)")
+        print("\(#function)")
 
     }
     
     func curiosityResearch() {
-        print("\(__FUNCTION__)")
+        print("\(#function)")
 
     }
     
     func myMessage() {
-        print("\(__FUNCTION__)")
+        print("\(#function)")
 
     }
     
     func userCenter() {
         let vc = UserCenterViewController()
        
-        presentViewController(vc, animated: true, completion: nil)
+        present(vc, animated: true, completion: nil)
         
         menuView?.hideMenuViewAnimation()
-        print("\(__FUNCTION__)")
+        print("\(#function)")
 
     }
     
     func homePage() {
-        print("\(__FUNCTION__)")
+        print("\(#function)")
 
     }
 }
@@ -143,7 +143,7 @@ extension PageViewController:SuspensionViewDelegate
 {
     // MARK: SuspensionViewDelegate
     func popUpMenu() {
-        let window = UIApplication.sharedApplication().keyWindow
+        let window = UIApplication.shared.keyWindow
         window!.insertSubview(menuView!, belowSubview:suspensionView!)
         menuView?.popupMunuViewAnimation()
     }
@@ -151,7 +151,7 @@ extension PageViewController:SuspensionViewDelegate
         menuView?.hideMenuViewAnimation()
     }
     func backToMenuView() {
-        suspensionView?.style = .QDaily
+        suspensionView?.style = .qDaily
         menuView?.hideMenuViewAnimation()
         
     }

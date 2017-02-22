@@ -27,14 +27,14 @@ class HomeLabsCell: UITableViewCell {
             newsTitleLabel?.text = feedModel?.post?.title
             subHeadTitleLabel?.text = feedModel?.post?.subhead
             if let nameStr = feedModel?.post?.image {
-                let url = NSURL(string: nameStr)
-                let manager = SDWebImageManager.sharedManager()
-                newsImageView?.sd_setImageWithURL(url, placeholderImage: UIImage(named: "feedback_placeholder"), options: SDWebImageOptions.RefreshCached, completed: { (image, error, cachType, url) -> Void in
-                    if manager.diskImageExistsForURL(url)  {// 缓存中有 不再加载
+                let url = URL(string: nameStr)
+                let manager = SDWebImageManager.shared()
+                newsImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "feedback_placeholder"), options: SDWebImageOptions.refreshCached, completed: { (image, error, cachType, url) -> Void in
+                    if (manager?.diskImageExists(for: url))!  {// 缓存中有 不再加载
                         return
                     } else {
                         self.newsImageView?.alpha = 0.0
-                        UIView.transitionWithView(self.newsImageView!, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+                        UIView.transition(with: self.newsImageView!, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: { () -> Void in
                             self.newsImageView?.alpha = 1.0
                             }, completion: nil)
                     }

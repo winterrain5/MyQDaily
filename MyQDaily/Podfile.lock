@@ -22,7 +22,6 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - SnapKit (0.18.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -32,7 +31,6 @@ DEPENDENCIES:
   - pop
   - PureLayout
   - SDWebImage
-  - SnapKit (~> 0.18.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -42,8 +40,7 @@ SPEC CHECKSUMS:
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SnapKit: e1f090a6d47b1dd4bd89b73f72b6746a7835ef3c
 
-PODFILE CHECKSUM: cb7e79375437ce5d45b8cc8cdb7cbb0b11ff4249
+PODFILE CHECKSUM: a67726ab0edde790f223b30342e781637d0e9abc
 
 COCOAPODS: 1.2.0.beta.1

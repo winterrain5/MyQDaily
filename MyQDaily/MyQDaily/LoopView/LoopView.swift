@@ -10,7 +10,7 @@ import UIKit
 let rid = "loopViewCell"
 
 protocol LoopViewDelegate:NSObjectProtocol {
-    func didSelectdidSelectCollectionItem(loopview:LoopView,appView:String)
+    func didSelectdidSelectCollectionItem(_ loopview:LoopView,appView:String)
 }
 
 class LoopView: UIView {
@@ -19,19 +19,19 @@ class LoopView: UIView {
     var collectionView:UICollectionView = {
         
         let layout = LoopViewLayout()
-        let clv = UICollectionView(frame:CGRectMake(0, 0, SCREEN_WIDTH,300), collectionViewLayout:layout)
-        clv.registerClass(LoopViewCell.self, forCellWithReuseIdentifier: rid)
+        let clv = UICollectionView(frame:CGRect(x: 0, y: 0, width: SCREEN_WIDTH,height: 300), collectionViewLayout:layout)
+        clv.register(LoopViewCell.self, forCellWithReuseIdentifier: rid)
         
         return  clv
     }()
     var pageControl:UIPageControl? = {
         let pc = UIPageControl()
-        pc.frame = CGRectMake(0,270,0,30)
-        pc.pageIndicatorTintColor = UIColor.grayColor()
-        pc.currentPageIndicatorTintColor = UIColor.whiteColor()
+        pc.frame = CGRect(x: 0,y: 270,width: 0,height: 30)
+        pc.pageIndicatorTintColor = UIColor.gray
+        pc.currentPageIndicatorTintColor = UIColor.white
         return pc
     }()
-    var timer:NSTimer?
+    var timer:Timer?
     
     
     
@@ -59,9 +59,9 @@ class LoopView: UIView {
             pageControl?.numberOfPages = (imageArray?.count)!
             
             // 更新视图
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                let path = NSIndexPath(forItem: 1, inSection: 0)
-                self.collectionView.scrollToItemAtIndexPath(path, atScrollPosition: UICollectionViewScrollPosition.Left, animated: false)
+            DispatchQueue.main.async { () -> Void in
+                let path = IndexPath(item: 1, section: 0)
+                self.collectionView.scrollToItem(at: path, at: UICollectionViewScrollPosition.left, animated: false)
                 
                 // 添加定时器
                 self.addTimer()
@@ -79,51 +79,51 @@ class LoopView: UIView {
 
 extension LoopView: UICollectionViewDataSource,UICollectionViewDelegate
 {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (imageArray?.count)!
     }
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(rid, forIndexPath: indexPath) as! LoopViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rid, for: indexPath) as! LoopViewCell
         cell.imageName = imageArray![indexPath.item ] as? String
         cell.title = titleArray![indexPath.item] as? String
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         
-        if ((delegate?.respondsToSelector(Selector("didSelectdidSelectCollectionItem::"))) != nil) {
+        if ((delegate?.responds(to: Selector("didSelectdidSelectCollectionItem::"))) != nil) {
             print(newsUrlMutableArray![indexPath.item])
             delegate?.didSelectdidSelectCollectionItem(self, appView: newsUrlMutableArray![indexPath.item] as! String)
         }
     }
     
     // 开始拖动是调用
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         scrollViewDidEndDecelerating(scrollView)
     }
     
     // 滚动减速时调用
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         var page = offsetX / scrollView.bounds.size.width
-        let temp:CGFloat = CGFloat(collectionView.numberOfItemsInSection(0) - 1)
+        let temp:CGFloat = CGFloat(collectionView.numberOfItems(inSection: 0) - 1)
         if page == 0 {
-            collectionView.contentOffset = CGPointMake(page * scrollView.frame.size.width, 0)
+            collectionView.contentOffset = CGPoint(x: page * scrollView.frame.size.width, y: 0)
         } else if page == temp {
             page = CGFloat((imageArray?.count)! - 1)
-            collectionView.contentOffset = CGPointMake(page * scrollView.frame.size.width, 0)
+            collectionView.contentOffset = CGPoint(x: page * scrollView.frame.size.width, y: 0)
         }
         
         // 设置pageController当前页
-        let currentPage = page % CGFloat(imageArray!.count)
+        let currentPage = page.truncatingRemainder(dividingBy: CGFloat(imageArray!.count))
         pageControl?.currentPage = Int(currentPage)
         
         // 添加定时器
         addTimer()
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // 移除定时器
         removeTimer()
     }
@@ -132,8 +132,8 @@ extension LoopView: UICollectionViewDataSource,UICollectionViewDelegate
      添加定时器
      */
     func addTimer() {
-        timer = NSTimer(timeInterval: 4, target: self, selector: Selector("nextImage"), userInfo: nil, repeats: true)
-        NSRunLoop.currentRunLoop().addTimer(timer!, forMode: "NSRunLoopCommonModes")
+        timer = Timer(timeInterval: 4, target: self, selector: #selector(LoopView.nextImage), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer!, forMode: RunLoopMode(rawValue: "NSRunLoopCommonModes"))
     }
     
     /**
@@ -150,7 +150,7 @@ extension LoopView: UICollectionViewDataSource,UICollectionViewDelegate
     func nextImage() {
         let offsetX = collectionView.contentOffset.x
         let page = offsetX / collectionView.bounds.size.width
-        collectionView.setContentOffset(CGPointMake((page + 1) * collectionView.bounds.size.width, 0), animated: true)
+        collectionView.setContentOffset(CGPoint(x: (page + 1) * collectionView.bounds.size.width, y: 0), animated: true)
     }
     
     override func layoutSubviews() {
@@ -163,13 +163,13 @@ extension LoopView: UICollectionViewDataSource,UICollectionViewDelegate
 }
 
 class LoopViewLayout:UICollectionViewFlowLayout {
-    override func prepareLayout() {
+    override func prepare() {
         // item的大小
         itemSize = (collectionView?.frame.size)!
         // 滚动方向
-        scrollDirection = UICollectionViewScrollDirection.Horizontal
+        scrollDirection = UICollectionViewScrollDirection.horizontal
         // 设置分页
-        collectionView?.pagingEnabled = true
+        collectionView?.isPagingEnabled = true
         // 设置最小间距
         minimumLineSpacing = 0
         minimumInteritemSpacing = 0
@@ -182,8 +182,8 @@ class LoopViewLayout:UICollectionViewFlowLayout {
 class LoopViewCell:UICollectionViewCell {
     
     // MARK: - 内部属性和方法
-    private var iconView:UIImageView?
-    private var titleLable:UILabel?
+    fileprivate var iconView:UIImageView?
+    fileprivate var titleLable:UILabel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -194,12 +194,12 @@ class LoopViewCell:UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    fileprivate func setupUI() {
         iconView = UIImageView()
         contentView.addSubview(iconView!)
         
         titleLable = UILabel()
-        titleLable?.textColor = UIColor.whiteColor()
+        titleLable?.textColor = UIColor.white
         titleLable?.font = UIFont(name: "Helvetica-Bold", size: 20.0)
         titleLable?.numberOfLines = 3
         contentView.addSubview(titleLable!)
@@ -209,7 +209,7 @@ class LoopViewCell:UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         iconView?.frame = contentView.bounds
-        titleLable?.frame = CGRectMake(20, contentView.bounds.size.height - 110, contentView.bounds.size.width - 40, 110)
+        titleLable?.frame = CGRect(x: 20, y: contentView.bounds.size.height - 110, width: contentView.bounds.size.width - 40, height: 110)
     }
     
     // MARK: - 外部属性和方法
@@ -217,8 +217,8 @@ class LoopViewCell:UICollectionViewCell {
     /**轮播图url字符串*/
     var imageName:String? {
         didSet {
-            let url = NSURL(string: imageName!)
-            iconView?.sd_setImageWithURL(url, placeholderImage: UIImage(named: "feedback_placeholder"))
+            let url = URL(string: imageName!)
+            iconView?.sd_setImage(with: url, placeholderImage: UIImage(named: "feedback_placeholder"))
         }
     }
     /**标题*/

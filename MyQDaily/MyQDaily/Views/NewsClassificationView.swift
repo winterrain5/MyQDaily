@@ -13,12 +13,12 @@ class NewsClassificationView: UIView {
     
     let rid = "classificationCell"
     // 新闻分类菜单
-    private var tableView:UITableView?
+    fileprivate var tableView:UITableView?
     // 悬浮按钮
-    private var suspensionView:SuspensionView?
+    fileprivate var suspensionView:SuspensionView?
     
     //
-    private var titleArray:[String] = {
+    fileprivate var titleArray:[String] = {
         let array =  ["皇家马德里",
             "阿森纳",
             "曼联",
@@ -29,7 +29,7 @@ class NewsClassificationView: UIView {
         return array
     }()
     /**菜单cell图片数组*/
-    private var imageArray:[String] = {
+    fileprivate var imageArray:[String] = {
         let array = ["menu_about",
             "menu_category",
             "menu_column",
@@ -46,21 +46,21 @@ class NewsClassificationView: UIView {
         setupUI()
     }
 
-    private func setupUI() {
+    fileprivate func setupUI() {
         
         
         tableView = UITableView()
-        tableView?.frame = CGRectMake(0, 0,SCREEN_WIDTH , SCREENH_HEIGHT - KHeaderViewH)
-        tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: rid)
-        tableView?.separatorStyle = UITableViewCellSeparatorStyle.None
-        tableView?.backgroundColor = UIColor.clearColor()
+        tableView?.frame = CGRect(x: 0, y: 0,width: SCREEN_WIDTH , height: SCREENH_HEIGHT - KHeaderViewH)
+        tableView?.register(UITableViewCell.self, forCellReuseIdentifier: rid)
+        tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView?.backgroundColor = UIColor.clear
         tableView?.dataSource = self
         tableView?.delegate = self
         addSubview(tableView!)
         
         suspensionView = SuspensionView()
-        suspensionView?.frame = CGRectMake(SCREEN_WIDTH, SCREENH_HEIGHT - KHeaderViewH - 70, 54, 54)
-        suspensionView?.style = .HomeBack
+        suspensionView?.frame = CGRect(x: SCREEN_WIDTH, y: SCREENH_HEIGHT - KHeaderViewH - 70, width: 54, height: 54)
+        suspensionView?.style = .homeBack
         suspensionView?.delegate = self
         insertSubview(suspensionView!, aboveSubview: tableView!)
     }
@@ -74,13 +74,13 @@ class NewsClassificationView: UIView {
     
     var backBlock:newsClassificationViewBlock?
     
-    func popAnimationWithView(view:UIView, offset:CGFloat, speed:CGFloat) {
+    func popAnimationWithView(_ view:UIView, offset:CGFloat, speed:CGFloat) {
         let popSpring = POPSpringAnimation(propertyNamed:kPOPLayerPositionX)
-        popSpring.toValue = view.center.x + offset;
-        popSpring.beginTime = CACurrentMediaTime() + 0.2;
-        popSpring.springBounciness = 8.0;
-        popSpring.springSpeed = speed;
-        view.pop_addAnimation(popSpring, forKey: "positionX")
+        popSpring?.toValue = view.center.x + offset;
+        popSpring?.beginTime = CACurrentMediaTime() + 0.2;
+        popSpring?.springBounciness = 8.0;
+        popSpring?.springSpeed = speed;
+        view.pop_add(popSpring, forKey: "positionX")
     }
     
     func popupSuspensionView() {
@@ -89,36 +89,36 @@ class NewsClassificationView: UIView {
         
     }
     func hideSuspensionView() {
-        UIView.animateWithDuration(0.15) { () -> Void in
+        UIView.animate(withDuration: 0.15, animations: { () -> Void in
             var tempFrame = self.suspensionView?.frame
             tempFrame?.origin.x  = SCREEN_WIDTH
             self.suspensionView?.frame = tempFrame!
-        }
+        }) 
     }
 }
 
 extension NewsClassificationView:SuspensionViewDelegate,UITableViewDataSource,UITableViewDelegate
 {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (titleArray.count)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(rid)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: rid)
         if cell == nil {
-            cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: rid)
+            cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: rid)
         }
         cell?.textLabel?.text = titleArray[indexPath.row]
         let imageStr = imageArray[indexPath.row]
         cell?.imageView?.image = UIImage(named:imageStr)
-        cell?.textLabel?.textColor = UIColor.darkGrayColor()
-        cell?.backgroundColor = UIColor.clearColor()
-        cell?.selectionStyle = UITableViewCellSelectionStyle.None
+        cell?.textLabel?.textColor = UIColor.darkGray
+        cell?.backgroundColor = UIColor.clear
+        cell?.selectionStyle = UITableViewCellSelectionStyle.none
         return cell!
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
     
