@@ -1,6 +1,5 @@
-# MyQDaily
-
-
+# MyQDaily仿好奇心日报
+一开始是用2.3写的，最近迁移到了3.0
 ## 首页
 
 <img src="http://ww2.sinaimg.cn/large/9dac93ccjw1fcldtlhylvj20af0j541n.jpg">
